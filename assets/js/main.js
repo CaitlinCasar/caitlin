@@ -89,6 +89,8 @@
 				overlayOpacity: 0.65,
 				usePopupDefaultStyling: false,
 				usePopupCaption: true,
+				popupCaptionHeight: 300,
+				popupCaptionTextSize: 11,
 				popupLoaderText: '',
 				windowMargin: 50,
 				usePopupNav: true

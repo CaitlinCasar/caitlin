@@ -502,6 +502,10 @@ input, select, textarea {
 		letter-spacing: 0.025em;
 	}
 
+
+	#work header.workfont {
+		color: #ffffff;
+	}
 		@media screen and (max-width: 1920px) {
 
 			body, input, textarea, select {
@@ -544,7 +548,7 @@ input, select, textarea {
 		}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-weight: 100;
+		font-weight: 100 !important;
 		color: inherit;
 		letter-spacing: -0.0325em;
 	}
@@ -1936,8 +1940,8 @@ input, select, textarea {
 		}
 
 			.main.style1 h2 {
-				font-size: 4.25em;
-				line-height: 1em;
+				font-size: 3em;
+				line-height: 3em;
 			}
 
 			.main.style1 > .content {
@@ -2022,7 +2026,7 @@ input, select, textarea {
 			}
 
 			.main.style3.primary {
-				background: #ffffff;
+				background: #212121;
 			}
 
 			.main.style3.secondary {
@@ -2060,7 +2064,7 @@ input, select, textarea {
 		@media screen and (max-width: 1920px) {
 
 			.main.style2 .content {
-				width: 40%;
+				width: 45%;
 			}
 
 		}
@@ -2223,8 +2227,10 @@ input, select, textarea {
 /* Intro */
 
 	#intro {
-		background: url("images/overlay.png"), url("microbe_splash.jpg");
-		background-size: 256px 256px, cover;
+		background: url("microbe_splash.jpg");
+		/* url("images/overlay.png"), */
+		background-size: cover;
+		/* 256px 256px, */
 		background-attachment: fixed, fixed;
 		background-position: top left, bottom center;
 		background-repeat: repeat, no-repeat;
@@ -2233,8 +2239,8 @@ input, select, textarea {
 /* One */
 
 	#one {
-		background: url("images/overlay.png"), url("../../images/one.jpg");
-		background-size: 256px 256px, cover;
+		background: url("field.jpg");
+		background-size: cover;
 		background-attachment: fixed, fixed;
 		background-position: top left, center center;
 	}
@@ -2242,8 +2248,8 @@ input, select, textarea {
 /* Two */
 
 	#two {
-		background: url("images/overlay.png"), url("../../images/two.jpg");
-		background-size: 256px 256px, cover;
+		background: url("caitlin.jpg");
+		background-size: cover;
 		background-attachment: fixed, fixed;
 		background-position: top left, center center;
 	}
@@ -2251,8 +2257,12 @@ input, select, textarea {
 /* Contact */
 
 	#contact {
-		overflow: hidden;
-		padding-bottom: 0;
+		background: url("gallionella.tif");
+		background-size: cover;
+		background-attachment: fixed, fixed;
+		background-position: top left, center center;
+		/* overflow: hidden; */
+		/* padding-bottom: 0; */
 	}
 
 		#contact .box {
