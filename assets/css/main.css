@@ -2032,6 +2032,10 @@ input, select, textarea {
 			.main.style3.secondary {
 				background: #f5f6f7;
 			}
+			.main.style3.secondary h2,
+			.main.style3.secondary p {
+				color: #f5f6f7;
+			}
 
 		.main.dark {
 			color: #ffffff;
