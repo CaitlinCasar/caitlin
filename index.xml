@@ -48,7 +48,7 @@
 pacman::p_load(tidyverse)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#read the data into a dataframe
 data &amp;lt;- read_delim(&amp;quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO136_Dec2015toApril2018_noChimera_otuTable_withTaxa_d10000.txt&amp;quot;, delim=&amp;quot;\t&amp;quot;, comment = &amp;quot;# &amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;iframe seamless src=&#34;../data_table/index.html&#34; width=&#34;100%&#34; height=&#34;500&#34;&gt;
+&lt;iframe seamless src=&#34;../test_files/figure-html/widgets/widget_unnamed-chunk-3.html&#34; width=&#34;100%&#34; height=&#34;500&#34;&gt;
 &lt;/iframe&gt;
 </description>
     </item>
