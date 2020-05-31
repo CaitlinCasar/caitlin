@@ -22,6 +22,36 @@
   </url>
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/ggplot/</loc>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/test/</loc>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/category/r/</loc>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/publication-type/2/</loc>
     <lastmod>2020-02-01T00:00:00+00:00</lastmod>
   </url>
@@ -43,11 +73,6 @@
   
   <url>
     <loc>/tag/source-themes/</loc>
-    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-02-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -118,15 +143,7 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-  </url>
-  
-  <url>
     <loc>/author/osburn-m.-r.-kruger-b.-k.-masterson-a.-l.-casar-c.-p.-amend-j.-p./</loc>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
   </url>
   
 </urlset>
