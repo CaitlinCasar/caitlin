@@ -1,0 +1,18 @@
+{
+  "name": "Caitlin Casar",
+  "short_name": "Caitlin Casar",
+  "lang": "en-us",
+  "theme_color": "rgba(255,202,51, 1)",
+  "background_color": "rgba(255,202,51, 1)",
+  "icons": [{
+    "src": "/images/icon_hu65d040ff31842b946eaf5b8caef82e07_3065_192x192_fill_lanczos_center_2.png",
+    "sizes": "192x192",
+    "type": "image/png"
+    }, {
+    "src": "/images/icon_hu65d040ff31842b946eaf5b8caef82e07_3065_512x512_fill_lanczos_center_2.png",
+    "sizes": "512x512",
+    "type": "image/png"
+     }],
+  "display": "standalone",
+  "start_url": "/?utm_source=web_app_manifest"
+}

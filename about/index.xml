@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hey, I&#39;m Caitlin | Caitlin Casar</title>
+    <link>/about/</link>
+      <atom:link href="/about/index.xml" rel="self" type="application/rss+xml" />
+    <description>Hey, I&#39;m Caitlin</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
+    <image>
+      <url>/images/icon_hu65d040ff31842b946eaf5b8caef82e07_3065_512x512_fill_lanczos_center_2.png</url>
+      <title>Hey, I&#39;m Caitlin</title>
+      <link>/about/</link>
+    </image>
+    
+    <item>
+      <title>About me</title>
+      <link>/about/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/about/about/</guid>
+      <description>
+
+
+&lt;p&gt;I’m Caitlin Casar, a PhD candidate insterested in astrobiology and data science. I love coding, graphic design, and hanging out with my two cats, Creme Fraiche and Neko.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
