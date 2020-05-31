@@ -67,6 +67,26 @@
   </url>
   
   <url>
+    <loc>/tag/astrobiology/</loc>
+    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/biofilms/</loc>
+    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/demmo/</loc>
+    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/geobiology/</loc>
+    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/publication/casar2020/</loc>
     <lastmod>2020-02-01T00:00:00+00:00</lastmod>
   </url>
@@ -82,12 +102,12 @@
   </url>
   
   <url>
-    <loc>/tag/source-themes/</loc>
-    <lastmod>2020-02-01T00:00:00+00:00</lastmod>
+    <loc>/publication/osburn2019/</loc>
+    <lastmod>2019-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/publication/osburn2019/</loc>
+    <loc>/tag/geochemistry/</loc>
     <lastmod>2019-07-01T00:00:00+00:00</lastmod>
   </url>
   
