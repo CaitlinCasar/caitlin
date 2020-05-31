@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ggplot | Caitlin Casar</title>
+    <link>/tag/ggplot/</link>
+      <atom:link href="/tag/ggplot/index.xml" rel="self" type="application/rss+xml" />
+    <description>ggplot</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 31 May 2020 21:14:16 -0500</lastBuildDate>
+    <image>
+      <url>/images/icon_hu65d040ff31842b946eaf5b8caef82e07_3065_512x512_fill_lanczos_center_2.png</url>
+      <title>ggplot</title>
+      <link>/tag/ggplot/</link>
+    </image>
+    
+    <item>
+      <title>Making figures for microbial ecology</title>
+      <link>/post/test/</link>
+      <pubDate>Sun, 31 May 2020 21:14:16 -0500</pubDate>
+      <guid>/post/test/</guid>
+      <description>
+
+
+&lt;a class=&#34;github-button&#34; href=&#34;https://github.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms&#34; data-icon=&#34;octicon-repo-forked&#34; aria-label=&#34;Fork ntkme/github-buttons on GitHub&#34;&gt;Fork&lt;/a&gt;
+&lt;script async defer src=&#34;https://buttons.github.io/buttons.js&#34;&gt;&lt;/script&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#load libraries 
+pacman::p_load(tidyverse)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#read the data into a dataframe
+data &amp;lt;- read_delim(&amp;quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO136_Dec2015toApril2018_noChimera_otuTable_withTaxa_d10000.txt&amp;quot;, delim=&amp;quot;\t&amp;quot;, comment = &amp;quot;# &amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;iframe seamless src=&#34;../test_files/figure-html/widgets/widget_unnamed-chunk-3.html&#34; width=&#34;100%&#34; height=&#34;500&#34;&gt;
+&lt;/iframe&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
