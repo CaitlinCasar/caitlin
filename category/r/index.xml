@@ -14,9 +14,9 @@
     
     <item>
       <title>Making figures for microbial ecology</title>
-      <link>/post/test/</link>
+      <link>/post/making_figs/</link>
       <pubDate>Sun, 31 May 2020 21:14:16 -0500</pubDate>
-      <guid>/post/test/</guid>
+      <guid>/post/making_figs/</guid>
       <description>
 &lt;script src=&#34;../../rmarkdown-libs/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
 &lt;script src=&#34;../../rmarkdown-libs/pymjs/pym.v1.js&#34;&gt;&lt;/script&gt;
@@ -35,14 +35,35 @@ pacman::p_load(tidyverse, readr, plyr, plotly, lubridate)&lt;/code&gt;&lt;/pre&g
 otu_table &amp;lt;- read_delim(&amp;quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO136_Dec2015toApril2018_noChimera_otuTable_withTaxa_d10000.txt&amp;quot;, delim=&amp;quot;\t&amp;quot;, comment = &amp;quot;# &amp;quot;)
 metadata &amp;lt;- read_csv(&amp;quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/metadata.csv&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;htmlwidget-1&#34; style=&#34;width:100%;height:400px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
-&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-1&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/test_files/figure-html//widgets/widget_unnamed-chunk-3.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-1&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/making_figs_files/figure-html//widgets/widget_unnamed-chunk-3.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
 &lt;p&gt;We want to look at the community compositions, so first let’s normalize and reshape the data.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;abundance_table &amp;lt;- otu_table %&amp;gt;%
   select(-taxonomy) %&amp;gt;%
   mutate_at(vars(-`#OTU ID`), funs(./sum(.)*100)) %&amp;gt;% #normalize to relative abundance 
   gather(sample_id, abundance, `7.DeMMO1.Steri.050917`:`18.800.DitchFluid.041818`) &lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;htmlwidget-2&#34; style=&#34;width:100%;height:400px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
-&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-2&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/test_files/figure-html//widgets/widget_unnamed-chunk-5.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-2&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/making_figs_files/figure-html//widgets/widget_unnamed-chunk-5.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;
+&lt;p&gt;Now let’s make a function for viewing the data at a few different taxonomic levels.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;taxon_abundance &amp;lt;- function(level, name){
+  otu_table %&amp;gt;%
+    select(`#OTU ID`, taxonomy) %&amp;gt;%
+    mutate(taxonomy = gsub(&amp;quot;Gammaproteobacteria; D_3__Betaproteobacteriales&amp;quot;, &amp;quot;Betaproteobacteria; D_3__Betaproteobacteriales&amp;quot;, taxonomy),
+           taxa = str_extract(taxonomy, level),
+           taxa = if_else(is.na(taxa), taxonomy, taxa)) %&amp;gt;%
+    right_join(abundance_table) %&amp;gt;%
+    ungroup() %&amp;gt;%
+    group_by(sample_id, taxa) %&amp;gt;%
+    summarise(abundance = sum(abundance)) %&amp;gt;%
+    left_join(metadata) %&amp;gt;% #add metadata
+    group_by(site, experiment.type, taxa) %&amp;gt;% 
+    summarise(abundance = sum(abundance))
+}
+
+family_level &amp;lt;- &amp;quot;(.*)(?=; D_5__)&amp;quot;
+class_level &amp;lt;- &amp;quot;(.*)(?=; D_3__)&amp;quot;
+phylum_level &amp;lt;- &amp;quot;(.*)(?=; D_2__)&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, we can selecy the taxonomic level in our function and recalculate the relative abundances. Let’s take a look at the phylum level.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;taxon_abundance_table &amp;lt;- taxon_abundance(family_level, &amp;quot;phylum&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
