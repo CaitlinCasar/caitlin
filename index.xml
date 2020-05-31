@@ -340,8 +340,27 @@ Three
       <description>
 
 
-&lt;p&gt;&lt;img alt=&#39;Caitlin&#39; width=300 style=&#39; border-radius: 50%;&#39; src=&#39;./about/about/avatar.jpg&#39; class=&#39;avatar-circle&#39; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#39;Caitlin&#39; width=300 style=&#39; border-radius: 50%;&#39; src=&#39;./about/avatar.jpg&#39; class=&#39;avatar-circle&#39; /&gt;&lt;/p&gt;
 &lt;p&gt;I’m Caitlin Casar, a PhD candidate insterested in astrobiology 👽 and data science 💾. I love coding, graphic design, and hanging out with my two cats, Creme Fraiche and Neko 🐱🐱.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Education&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;🎓 PhD Candidate Earth and Planetary Sciences (2016-current), Northwestern University&lt;br&gt;
+🎓 M.S. Earth and Environmental Sciences (2015), University of Illinois at Chicago&lt;br&gt;
+🎓 B.S. Geology (2012), East Carolina University&lt;br&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hey, I&#39;m Caitlin</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/about/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;img alt=&#39;Caitlin&#39; width=300 style=&#39; border-radius: 50%;&#39; src=&#39;./about/avatar.jpg&#39; class=&#39;avatar-circle&#39; /&gt;&lt;/p&gt;
+&lt;p&gt;I’m Caitlin Casar, a PhD candidate insterested in astrobiology 👽 and data science 💾. I love coding, graphic design, and hanging out with my two cats, Creme Fraiche and Neko 🐱🐱.&lt;/p&gt;
+&lt;p&gt;here is some new content
+🎓&lt;/p&gt;
 </description>
     </item>
     
