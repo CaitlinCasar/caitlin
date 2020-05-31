@@ -628,7 +628,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    2 min read
   </span>
   
 
@@ -677,16 +677,23 @@
 <a class="github-button" href="https://github.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms" data-icon="octicon-repo-forked" aria-label="Fork ntkme/github-buttons on GitHub">Fork</a>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <p>This is a tutorial for making figures that are common in microbial ecology. Here I’m using data and code from my publication in Geobiolgy. You can fork the repo by clicking the button above!</p>
-<p>Once you have the data downloaded, you’ll need to set up your environment. This code depends on the R packages being loaded here:</p>
+<p>To generate the data, we sequenced DNA from microbial communities at our study site DeMMO. The raw sequence data was processed with QIIME to produce an OTU table. OTUs, or operational taxonomic units, are bins that differentiate sequences at a 97% similarity threshold. For our purposes, you can think of an OTU as a species of bacteria or archaea. As a microbial ecologist, you might want to compare your microbial communities in terms of alpha or beta diversity. Let’s make some plots to explore our microbial communities!</p>
+<p>Before we get started, you’ll need to set up your environment in R. This code depends on the packages being loaded here:</p>
 <pre class="r"><code>#load libraries 
-pacman::p_load(tidyverse)</code></pre>
-<p>Next, read the data into a dataframe. You can preview the data in the table below this code chunk.</p>
+pacman::p_load(tidyverse, readr, plyr, plotly, lubridate)</code></pre>
+<p>Next, read the OTU data into a dataframe. We can pull the data directy from Github by reading the raw file. You can preview the data in the table below this code chunk.</p>
 <pre class="r"><code>#read the data into a dataframe
-data &lt;- read_delim(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO136_Dec2015toApril2018_noChimera_otuTable_withTaxa_d10000.txt&quot;, delim=&quot;\t&quot;, comment = &quot;# &quot;)</code></pre>
+otu_table &lt;- read_delim(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO136_Dec2015toApril2018_noChimera_otuTable_withTaxa_d10000.txt&quot;, delim=&quot;\t&quot;, comment = &quot;# &quot;)
+metadata &lt;- read_csv(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/metadata.csv&quot;) </code></pre>
 <div id="htmlwidget-1" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
 <script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/test_files/figure-html//widgets/widget_unnamed-chunk-3.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
-<a href="https://your-url" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<p>We want to look at the community compositions, so first let’s normalize and reshape the data.</p>
+<pre class="r"><code>abundance_table &lt;- otu_table %&gt;%
+  select(-taxonomy) %&gt;%
+  mutate_at(vars(-`#OTU ID`), funs(./sum(.)*100)) %&gt;% #normalize to relative abundance 
+  gather(sample_id, abundance, `7.DeMMO1.Steri.050917`:`18.800.DitchFluid.041818`) </code></pre>
+<div id="htmlwidget-2" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/post/test_files/figure-html//widgets/widget_unnamed-chunk-5.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
 
     </div>
 
