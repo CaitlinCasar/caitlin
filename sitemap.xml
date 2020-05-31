@@ -23,42 +23,32 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-05-30T21:14:16-05:00</lastmod>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2015-07-23-r-rmarkdown/</loc>
-    <lastmod>2020-05-30T21:14:16-05:00</lastmod>
+    <loc>/tag/ggplot/</loc>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/tag/plot/</loc>
-    <lastmod>2020-05-30T21:14:16-05:00</lastmod>
+    <loc>/post/test/</loc>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-05-30T21:14:16-05:00</lastmod>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
   </url>
   
   <url>
     <loc>/category/r/</loc>
-    <lastmod>2020-05-30T21:14:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/r-markdown/</loc>
-    <lastmod>2020-05-30T21:14:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/regression/</loc>
-    <lastmod>2020-05-30T21:14:16-05:00</lastmod>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2020-05-30T21:14:16-05:00</lastmod>
+    <lastmod>2020-05-31T21:14:16-05:00</lastmod>
   </url>
   
   <url>
@@ -154,10 +144,6 @@
   
   <url>
     <loc>/author/osburn-m.-r.-kruger-b.-k.-masterson-a.-l.-casar-c.-p.-amend-j.-p./</loc>
-  </url>
-  
-  <url>
-    <loc>/post/test/</loc>
   </url>
   
 </urlset>
