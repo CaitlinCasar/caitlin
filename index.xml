@@ -356,7 +356,7 @@ Three
 &lt;div class=&#34;horizontal_line&#34;&gt;
 
 &lt;/div&gt;
-&lt;ul class=&#34;press-list&#34;&gt;
+&lt;ul class=&#34;gray-bullets&#34;&gt;
 &lt;li&gt;
 &lt;span&gt;
 &lt;a href=&#34;https://www.c2st.org/subsurface-biofilms-could-hold-clues-to-alien-life-astrobiologists-say/&#34; target=&#34;_blank&#34;&gt;2019 Chicago Council on Science and Technology&lt;/a&gt;
@@ -373,6 +373,37 @@ Three
 &lt;/span&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;projects&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;strong&gt;Projects&lt;/strong&gt;&lt;/h3&gt;
+&lt;div class=&#34;horizontal_line&#34;&gt;
+
+&lt;/div&gt;
+&lt;ul class=&#34;gray-bullets&#34;&gt;
+&lt;span&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://deepminemicrobialobservatory.com/&#34; target=&#34;_blank&#34;&gt;DeMMO Website&lt;/a&gt;
+&lt;/span&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div style=&#34;margin-top: 15px; margin-bottom: 20px;&#34;&gt;
+&lt;iframe src=&#34;https://deepminemicrobialobservatory.com/&#34; width=&#34;100%&#34; height=&#34;300&#34; style=&#34;border: none;&#34;&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div class=&#34;horizontal_line&#34;&gt;
+
+&lt;/div&gt;
+&lt;ul class=&#34;gray-bullets&#34;&gt;
+&lt;span&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://deepminemicrobialobservatory.com/shiny/DeMMO_Geochem/&#34; target=&#34;_blank&#34;&gt;DeMMO Shiny App&lt;/a&gt;
+&lt;/span&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div style=&#34;margin-top: 15px; margin-bottom: 20px;&#34;&gt;
+&lt;iframe src=&#34;https://deepminemicrobialobservatory.com/shiny/DeMMO_Geochem/&#34; width=&#34;100%&#34; height=&#34;300&#34; style=&#34;border: none;&#34;&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 </description>
     </item>
