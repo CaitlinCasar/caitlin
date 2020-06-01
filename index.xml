@@ -382,12 +382,12 @@ Three
 &lt;ul class=&#34;gray-bullets&#34;&gt;
 &lt;span&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://deepminemicrobialobservatory.com/&#34; target=&#34;_blank&#34;&gt;DeMMO Website&lt;/a&gt;
+&lt;a href=&#34;https://deepminemicrobialobservatory.com/&#34; target=&#34;_blank&#34; style=&#34;font-size: 16px;&#34;&gt;DeMMO Website&lt;/a&gt;
 &lt;/span&gt;
 &lt;/li&gt;
 &lt;span&gt;
 &lt;li&gt;
-&lt;a href=&#34;https://deepminemicrobialobservatory.com/shiny/DeMMO_Geochem/&#34; target=&#34;_blank&#34;&gt;DeMMO Shiny App&lt;/a&gt;
+&lt;a href=&#34;https://deepminemicrobialobservatory.com/shiny/DeMMO_Geochem/&#34; target=&#34;_blank&#34; style=&#34;font-size: 16px;&#34;&gt;DeMMO Shiny App&lt;/a&gt;
 &lt;/span&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
