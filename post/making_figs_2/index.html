@@ -1,0 +1,1195 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  
+
+  
+  
+  
+    
+  
+  <meta name="description" content="This is the one of several tutorials I’m putting together for making figures that are common in microbial ecology. Today we’ll create an interactive NMDS plot for exploring your microbial community data.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="../../post/making_figs_2/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="rgba(255,202,51, 1)">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="../../css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131131266-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-131131266-2', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="../../index.webmanifest">
+  <link rel="icon" type="image/png" href="../../images/icon_hu65d040ff31842b946eaf5b8caef82e07_3065_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="../../images/icon_hu65d040ff31842b946eaf5b8caef82e07_3065_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="../../post/making_figs_2/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@DeepSubsurfer">
+  <meta property="twitter:creator" content="@DeepSubsurfer">
+  
+  <meta property="og:site_name" content="Caitlin Casar">
+  <meta property="og:url" content="/post/making_figs_2/">
+  <meta property="og:title" content="Making figures for microbial ecology: Interactive NMDS plots | Caitlin Casar">
+  <meta property="og:description" content="This is the one of several tutorials I’m putting together for making figures that are common in microbial ecology. Today we’ll create an interactive NMDS plot for exploring your microbial community data."><meta property="og:image" content="/post/making_figs_2/featured.jpeg">
+  <meta property="twitter:image" content="/post/making_figs_2/featured.jpeg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-06-01T21:14:16-05:00">
+    
+    <meta property="article:modified_time" content="2020-06-01T21:14:16-05:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/making_figs_2/"
+  },
+  "headline": "Making figures for microbial ecology: Interactive NMDS plots",
+  
+  "image": [
+    "/post/making_figs_2/featured.jpeg"
+  ],
+  
+  "datePublished": "2020-06-01T21:14:16-05:00",
+  "dateModified": "2020-06-01T21:14:16-05:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caitlin Casar",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/logo_hu72029ba191613179bebc9dcbb012e0bd_27617_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "This is the one of several tutorials I’m putting together for making figures that are common in microbial ecology. Today we’ll create an interactive NMDS plot for exploring your microbial community data."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+<title>Making figures for microbial ecology: Interactive NMDS plots - Caitlin Casar</title>
+<meta property="og:title" content="Making figures for microbial ecology: Interactive NMDS plots - Caitlin Casar">
+<meta property="og:type" content="article">
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://xvrdm.github.io//images/NMDS_plot.jpeg" >
+  
+  
+
+<meta property="description" content="Learn to create an interactive NMDS plot in R.">
+<meta property="og:description" content="Learn to create an interactive NMDS plot in R.">
+
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:site" content="">
+
+
+  <title>Making figures for microbial ecology: Interactive NMDS plots | Caitlin Casar</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="../../index.html"><img src="https://www.pizzanecklaces.com/wp-content/uploads/2019/12/split.gif" alt="Caitlin Casar">
+        <span class="text">Caitlin Casar</span>  
+        </a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="../../">Caitlin Casar</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../about/about/index.html"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../index.html#posts"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../index.html#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../index.html#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../files/Casar_CV_May2020.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      <li class="nav-item">
+        <a href="https://www.buymeacoffee.com/aArveHBGx">
+          <i class="fas fa-coffee coffee"></i>
+        </a>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link js-theme-selector">
+          <i class="fas fa-moon js-set-theme-dark"></i>
+          <i class="fas fa-sun js-set-theme-light"></i>
+        </a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>Making figures for microbial ecology: Interactive NMDS plots</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jun 1, 2020
+  </span>
+  
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="../../category/r/">R</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 502px; max-height: 429px;">
+  <div style="position: relative">
+    <img src="../../post/making_figs_2/featured.jpeg" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+<script src="../../rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="../../rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="../../rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+<script src="../../rmarkdown-libs/plotly-binding/plotly.js"></script>
+<script src="../../rmarkdown-libs/typedarray/typedarray.min.js"></script>
+<script src="../../rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="../../rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="../../rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
+
+
+<p>This is the one of several tutorials I’m putting together for making figures that are common in microbial ecology. Today we’ll create an interactive NMDS plot for exploring your microbial community data. NMDS, or Nonmetric Multidimensional Scaling, is a method for dimensionality reduction. This works great for high demensional datasets like microbial communities and makes it visually easy to compare lots of communities to each other. We’re using NMDS rather than PCA (principle coordinates analysis) because this method can accomodate the Bray-Curtis dissimilarity distance metric, which is better suited for our community data than Euclidean distance. For this tutorial I’m using data and code from my <a href="https://caitlincasar.com/publication/casar2020/">publication</a> in <em>Geobiology</em>.</p>
+<p>First we’ll need to set up our environment in R:</p>
+<pre class="r"><code>#load libraries 
+pacman::p_load(tidyverse, plotly, vegan)</code></pre>
+<p>Next, read the OTU data into a dataframe. We can pull the data directy from Github by reading the raw file. You can preview the data in the table below this code chunk.</p>
+<pre class="r"><code>#read the data into a dataframe
+otu_table &lt;- read_delim(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO136_Dec2015toApril2018_noChimera_otuTable_withTaxa_d10000.txt&quot;, delim=&quot;\t&quot;, comment = &quot;# &quot;)
+
+metadata &lt;- read_csv(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/metadata.csv&quot;) </code></pre>
+<div id="htmlwidget-1" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/making_figs_2/index_files/figure-html//widgets/widget_unnamed-chunk-3.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>First we need to normalize our data.</p>
+<pre class="r"><code>otu_norm &lt;- otu_table %&gt;%
+  select(-taxonomy) %&gt;%
+  mutate_at(vars(-`#OTU ID`), funs(./sum(.)*100)) %&gt;% #normalize to relative abundance 
+  gather(sample_id, abundance, `7.DeMMO1.Steri.050917`:`18.800.DitchFluid.041818`) %&gt;%
+  spread(key = `#OTU ID`,value = &#39;abundance&#39;) %&gt;%
+  right_join(metadata %&gt;% select(sample_id)) %&gt;%
+  column_to_rownames(&quot;sample_id&quot;)</code></pre>
+<p>Now, let’s use the metaMDS function in vegan to perform NMDS. We’ll use the default distance metric, Bray-Curtis dissimilarity, and set the argument k to 2 dimensions.</p>
+<pre class="r"><code>NMDS_ord &lt;- otu_norm %&gt;%
+  metaMDS(k=2)</code></pre>
+<p>Now let’s pull out the NMDS coordinates for axes MDS1 and MDS2 for plotting purposes.</p>
+<pre class="r"><code>#pull out ordination and vector coordinates for plotting
+NMDS_coords &lt;- NMDS_ord[[&quot;points&quot;]] %&gt;%
+  as_tibble(rownames = &quot;sample_id&quot;) %&gt;%
+  left_join(metadata)</code></pre>
+<p>We can create a dictionary of shapes for our plot like this:</p>
+<pre class="r"><code>#make shape dictionary for ploting 
+shape_dict &lt;- c(0, 15, 15, 1, 19, 19, 2, 17, 17, 5, 5)
+names(shape_dict) &lt;- c(&quot;D1.fluid&quot;, &quot;D1.inert.control&quot;, &quot;D1.mineral&quot;, &quot;D3.fluid&quot;, &quot;D3.inert.control&quot;, &quot;D3.mineral&quot;, &quot;D6.fluid&quot;, &quot;D6.inert.control&quot;, &quot;D6.mineral&quot;,&quot;D3.cont.control&quot;, &quot;ambient.control&quot;)</code></pre>
+<p>Now let’s plot the data!</p>
+<pre class="r"><code>#NMDS plot with controls 
+NMDS_plot &lt;- NMDS_coords %&gt;%
+  ggplot(aes(MDS1, MDS2)) +
+  geom_point(size=2, alpha=0.8, aes(shape=site.type, color=site.type, label = sample_id)) +
+  scale_shape_manual(values=shape_dict) +
+  theme(legend.key.size = unit(.5, &quot;cm&quot;))
+
+
+#visualize interactive plot
+ggplotly(NMDS_plot)</code></pre>
+<div id="htmlwidget-2" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"data":[{"x":[0.0300505035139207,1.13019960561442,1.2740806196361,-1.29225597613129],"y":[-3.65701176147247,-3.2874527380206,-3.00837737389789,-4.81586460519378],"text":["site.type: ambient.control<br />site.type: ambient.control<br />sample_id: 34.4100L.DrillFluid.051716<br />MDS1:  0.0300505<br />MDS2: -3.657011761","site.type: ambient.control<br />site.type: ambient.control<br />sample_id: NU.48.800.D1.SlideBlank.Sep2016<br />MDS1:  1.1301996<br />MDS2: -3.287452738","site.type: ambient.control<br />site.type: ambient.control<br />sample_id: NU.54.4800.D1.SlideBlank.Sep2016<br />MDS1:  1.2740806<br />MDS2: -3.008377374","site.type: ambient.control<br />site.type: ambient.control<br />sample_id: 18.800.DitchFluid.041818<br />MDS1: -1.2922560<br />MDS2: -4.815864605"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.8,"size":7.55905511811024,"symbol":"diamond-open","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"ambient.control","legendgroup":"ambient.control","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-2.15480738006802,-2.51760810411345,-2.0925117450233,-2.13000461219313,-1.96692570684738],"y":[-1.72971607885101,-1.68383861813803,-1.57141708934233,-1.50525231921199,-1.47168802838237],"text":["site.type: D1.fluid<br />site.type: D1.fluid<br />sample_id: 7.DeMMO1.Steri.050917<br />MDS1: -2.1548074<br />MDS2: -1.729716079","site.type: D1.fluid<br />site.type: D1.fluid<br />sample_id: 1.DeMMO1.steri.083117<br />MDS1: -2.5176081<br />MDS2: -1.683838618","site.type: D1.fluid<br />site.type: D1.fluid<br />sample_id: 1.DeMMO1.steri.113017<br />MDS1: -2.0925117<br />MDS2: -1.571417089","site.type: D1.fluid<br />site.type: D1.fluid<br />sample_id: 12.DeMMO1.steri.041818<br />MDS1: -2.1300046<br />MDS2: -1.505252319","site.type: D1.fluid<br />site.type: D1.fluid<br />sample_id: 1.DeMMO1.Steri.021517<br />MDS1: -1.9669257<br />MDS2: -1.471688028"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(216,144,0,1)","opacity":0.8,"size":7.55905511811024,"symbol":"square-open","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)"}},"hoveron":"points","name":"D1.fluid","legendgroup":"D1.fluid","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-1.2769914064167,-1.39595685001911,-1.74007732244141,-1.62312945134705,-1.44508061851522,-1.65004929703327,-1.56887202049254],"y":[-0.35747178045892,-0.395771186300886,0.711164872799784,0.473798153163986,0.12332959763709,0.769575406845122,-0.0502574166400413],"text":["site.type: D1.inert.control<br />site.type: D1.inert.control<br />sample_id: NU.24.DeMMO1.D1.wool.Sep2016<br />MDS1: -1.2769914<br />MDS2: -0.357471780","site.type: D1.inert.control<br />site.type: D1.inert.control<br />sample_id: NU.25.DeMMO1.D1.sand.Sep2016<br />MDS1: -1.3959569<br />MDS2: -0.395771186","site.type: D1.inert.control<br />site.type: D1.inert.control<br />sample_id: 31.DeMMO1.SC7.top.041818<br />MDS1: -1.7400773<br />MDS2:  0.711164873","site.type: D1.inert.control<br />site.type: D1.inert.control<br />sample_id: 32.DeMMO1.SC8.top.041818<br />MDS1: -1.6231295<br />MDS2:  0.473798153","site.type: D1.inert.control<br />site.type: D1.inert.control<br />sample_id: 33.DeMMO1.SC9.top.041818<br />MDS1: -1.4450806<br />MDS2:  0.123329598","site.type: D1.inert.control<br />site.type: D1.inert.control<br />sample_id: 34.DeMMO1.SC10.top.041818<br />MDS1: -1.6500493<br />MDS2:  0.769575407","site.type: D1.inert.control<br />site.type: D1.inert.control<br />sample_id: 50.DeMMO1.12.top.041818<br />MDS1: -1.5688720<br />MDS2: -0.050257417"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":0.8,"size":7.55905511811024,"symbol":"square","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"D1.inert.control","legendgroup":"D1.inert.control","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-1.48941332061209,-1.64602407308615,-1.48788768231745,-1.43212299809234,-1.81350781023314,-1.62183440126251,-1.98504124139161,-1.59782245975708,-1.58690645440121,-1.55022351459229,-1.67994397817496,-1.78090645101939],"y":[-0.100526970399717,-0.26331966448114,-0.164500734267045,-0.130275308824581,0.426330173514142,0.163203438660899,-0.254192837398561,0.0368640879525171,-0.0105959227611109,0.145070684884272,0.561003635322176,-0.0191618547187128],"text":["site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 20.DeMMO1.A.top.041818<br />MDS1: -1.4894133<br />MDS2: -0.100526970","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 22.DeMMO1.C.top.041818<br />MDS1: -1.6460241<br />MDS2: -0.263319664","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 23.DeMMO1.D.top.041818<br />MDS1: -1.4878877<br />MDS2: -0.164500734","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 24.DeMMO1.E.top.041818<br />MDS1: -1.4321230<br />MDS2: -0.130275309","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 26.DeMMO1.SC1.top.041818<br />MDS1: -1.8135078<br />MDS2:  0.426330174","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 27.DeMMO1.SC2.top.041818<br />MDS1: -1.6218344<br />MDS2:  0.163203439","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 28.DeMMO1.SC3.top.041818<br />MDS1: -1.9850412<br />MDS2: -0.254192837","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 29.DeMMO1.SC4.top.041818<br />MDS1: -1.5978225<br />MDS2:  0.036864088","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 30.DeMMO1.SC5.top.041818<br />MDS1: -1.5869065<br />MDS2: -0.010595923","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 45.DeMMO1.7.top.041818<br />MDS1: -1.5502235<br />MDS2:  0.145070685","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 46.DeMMO1.8.top.041818<br />MDS1: -1.6799440<br />MDS2:  0.561003635","site.type: D1.mineral<br />site.type: D1.mineral<br />sample_id: 47.DeMMO1.9.top.041818<br />MDS1: -1.7809065<br />MDS2: -0.019161855"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(57,182,0,1)","opacity":0.8,"size":7.55905511811024,"symbol":"square","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)"}},"hoveron":"points","name":"D1.mineral","legendgroup":"D1.mineral","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-0.672502458649152,-0.694675960255685,-0.529680244010994,-0.442393867034654,-0.561849056698735,-0.643304418147664,-0.6738286209179,-0.647707431394587],"y":[1.7479686873847,0.366511788265099,0.437190423295549,0.230594550895121,0.282531466896458,0.482460295690266,0.440602668467494,0.403616924921665],"text":["site.type: D3.fluid<br />site.type: D3.fluid<br />sample_id: NU.18.DeMMO3.Steri.Dec2015<br />MDS1: -0.6725025<br />MDS2:  1.747968687","site.type: D3.fluid<br />site.type: D3.fluid<br />sample_id: 28.24790.071216<br />MDS1: -0.6946760<br />MDS2:  0.366511788","site.type: D3.fluid<br />site.type: D3.fluid<br />sample_id: NU.05.DeMMO3.Steri.2.092116<br />MDS1: -0.5296802<br />MDS2:  0.437190423","site.type: D3.fluid<br />site.type: D3.fluid<br />sample_id: 6.DeMMO3.Steri.021517<br />MDS1: -0.4423939<br />MDS2:  0.230594551","site.type: D3.fluid<br />site.type: D3.fluid<br />sample_id: 9.DeMMO3.Steri.051117<br />MDS1: -0.5618491<br />MDS2:  0.282531467","site.type: D3.fluid<br />site.type: D3.fluid<br />sample_id: 3.DeMMO3.steri.083117<br />MDS1: -0.6433044<br />MDS2:  0.482460296","site.type: D3.fluid<br />site.type: D3.fluid<br />sample_id: 3.DeMMO3.steri.112717<br />MDS1: -0.6738286<br />MDS2:  0.440602668","site.type: D3.fluid<br />site.type: D3.fluid<br />sample_id: 14.DeMMO3.steri.041718<br />MDS1: -0.6477074<br />MDS2:  0.403616925"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":0.8,"size":7.55905511811024,"symbol":"circle-open","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"D3.fluid","legendgroup":"D3.fluid","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-0.371613354243042,-0.596183417025718,-0.588848252528433,-0.741615083038611,-0.508903752095558],"y":[0.704609620412118,0.871726452847922,1.02690472579487,1.01318463269102,0.894828121529967],"text":["site.type: D3.inert.control<br />site.type: D3.inert.control<br />sample_id: NU.44.DeMMO3.D1.wool.Sep2016<br />MDS1: -0.3716134<br />MDS2:  0.704609620","site.type: D3.inert.control<br />site.type: D3.inert.control<br />sample_id: NU.45.DeMMO3.D1.sand.Sep2016<br />MDS1: -0.5961834<br />MDS2:  0.871726453","site.type: D3.inert.control<br />site.type: D3.inert.control<br />sample_id: 35.DeMMO3.T12.top.051117<br />MDS1: -0.5888483<br />MDS2:  1.026904726","site.type: D3.inert.control<br />site.type: D3.inert.control<br />sample_id: 44.DeMMO3.6.top.041718<br />MDS1: -0.7416151<br />MDS2:  1.013184633","site.type: D3.inert.control<br />site.type: D3.inert.control<br />sample_id: 56.DeMMO3.F.top.041718<br />MDS1: -0.5089038<br />MDS2:  0.894828122"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":0.8,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"D3.inert.control","legendgroup":"D3.inert.control","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-0.553601532620819,-0.589598008787037,-0.672169177890189,-0.434003429184824,-0.566781650209596,-0.760104359020417,-0.582733873954609,-0.505683465608917,-0.685296119448266,-0.573741953456427,-0.516411040333959,-0.629580490821041],"y":[1.32449598579212,1.27205773023464,1.05767385127874,1.16120810327585,0.983665662105113,1.1850391710569,1.08884806603124,1.21172058261892,0.835435694670259,0.783335825266977,0.617701846749887,0.748066021727884],"text":["site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 25.DeMMO3.T7.top.051117<br />MDS1: -0.5536015<br />MDS2:  1.324495986","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 27.DeMMO3.T8.top.051117<br />MDS1: -0.5895980<br />MDS2:  1.272057730","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 29.DeMMO3.T9.top.051117<br />MDS1: -0.6721692<br />MDS2:  1.057673851","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 31.DeMMO3.T10.top.051117<br />MDS1: -0.4340034<br />MDS2:  1.161208103","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 33.DeMMO3.T11.top.051117<br />MDS1: -0.5667817<br />MDS2:  0.983665662","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 39.DeMMO3.1.top.041718<br />MDS1: -0.7601044<br />MDS2:  1.185039171","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 40.DeMMO3.2.top.041718<br />MDS1: -0.5827339<br />MDS2:  1.088848066","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 41.DeMMO3.3.top.041718<br />MDS1: -0.5056835<br />MDS2:  1.211720583","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 51.DeMMO3.A.top.041718<br />MDS1: -0.6852961<br />MDS2:  0.835435695","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 53.DeMMO3.C.top.041718<br />MDS1: -0.5737420<br />MDS2:  0.783335825","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 54.DeMMO3.D.top.041718<br />MDS1: -0.5164110<br />MDS2:  0.617701847","site.type: D3.mineral<br />site.type: D3.mineral<br />sample_id: 55.DeMMO3.E.top.041718<br />MDS1: -0.6295805<br />MDS2:  0.748066022"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":0.8,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"D3.mineral","legendgroup":"D3.mineral","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3.50120274746504,3.39212385956367,3.11596274747079,3.12494243965747,2.73522367299396,2.45333404467643,2.73089153707769,2.62785980005118,2.27003370497714],"y":[0.183977607839941,0.210810835763527,-0.217127961786946,0.143427047748959,0.135546982046021,-0.131197519691718,0.17159948855288,0.623214329732175,-0.294925764115166],"text":["site.type: D6.fluid<br />site.type: D6.fluid<br />sample_id: NU.20.DeMMO6.Steri.120815<br />MDS1:  3.5012027<br />MDS2:  0.183977608","site.type: D6.fluid<br />site.type: D6.fluid<br />sample_id: 30.DuselB.050416<br />MDS1:  3.3921239<br />MDS2:  0.210810836","site.type: D6.fluid<br />site.type: D6.fluid<br />sample_id: NU.03.DeMMO6.Steri.2.092316<br />MDS1:  3.1159627<br />MDS2: -0.217127962","site.type: D6.fluid<br />site.type: D6.fluid<br />sample_id: NU.11.DeMMO6.Steri.2.120716<br />MDS1:  3.1249424<br />MDS2:  0.143427048","site.type: D6.fluid<br />site.type: D6.fluid<br />sample_id: 5.DeMMO6.Steri.021415<br />MDS1:  2.7352237<br />MDS2:  0.135546982","site.type: D6.fluid<br />site.type: D6.fluid<br />sample_id: 12.DeMMO6.Steri#2.051017<br />MDS1:  2.4533340<br />MDS2: -0.131197520","site.type: D6.fluid<br />site.type: D6.fluid<br />sample_id: 6.DeMMO6.steri.082917<br />MDS1:  2.7308915<br />MDS2:  0.171599489","site.type: D6.fluid<br />site.type: D6.fluid<br />sample_id: 6.DeMMO6.steri.112817<br />MDS1:  2.6278598<br />MDS2:  0.623214330","site.type: D6.fluid<br />site.type: D6.fluid<br />sample_id: 17.DeMMO6.041618<br />MDS1:  2.2700337<br />MDS2: -0.294925764"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(149,144,255,1)","opacity":0.8,"size":7.55905511811024,"symbol":"triangle-up-open","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)"}},"hoveron":"points","name":"D6.fluid","legendgroup":"D6.fluid","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3.04082921604935,3.00045897021032,3.02870246639722,3.02935553299992,2.84465848886035],"y":[-0.0695488221337876,-0.179253816712017,-0.349799139091131,-0.521328120021212,-0.0204256413135849],"text":["site.type: D6.inert.control<br />site.type: D6.inert.control<br />sample_id: NU.36.DeMMO6.D1.wool.Sep2016<br />MDS1:  3.0408292<br />MDS2: -0.069548822","site.type: D6.inert.control<br />site.type: D6.inert.control<br />sample_id: NU.37.DeMMO6.D1.sand.Sep2016<br />MDS1:  3.0004590<br />MDS2: -0.179253817","site.type: D6.inert.control<br />site.type: D6.inert.control<br />sample_id: NU.38.DeMMO6.D1.3mmPyrex.Sep2016<br />MDS1:  3.0287025<br />MDS2: -0.349799139","site.type: D6.inert.control<br />site.type: D6.inert.control<br />sample_id: NU.39.DeMMO6.5mmPyrex.Sep2016<br />MDS1:  3.0293555<br />MDS2: -0.521328120","site.type: D6.inert.control<br />site.type: D6.inert.control<br />sample_id: 24.DeMMO6.T6.bottom.051017<br />MDS1:  2.8446585<br />MDS2: -0.020425641"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":0.8,"size":7.55905511811024,"symbol":"triangle-up","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"D6.inert.control","legendgroup":"D6.inert.control","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.73136479649983,2.68784370838305,3.02412133508802,2.63662046885942,2.8588556269136],"y":[0.0172261412969091,-0.00771433740825903,0.296801197562644,0.347789425695249,-0.444698595884067],"text":["site.type: D6.mineral<br />site.type: D6.mineral<br />sample_id: 13.DeMMO6.T1.top.051017<br />MDS1:  2.7313648<br />MDS2:  0.017226141","site.type: D6.mineral<br />site.type: D6.mineral<br />sample_id: 15.DeMMO6.T2.top.051017<br />MDS1:  2.6878437<br />MDS2: -0.007714337","site.type: D6.mineral<br />site.type: D6.mineral<br />sample_id: 17.DeMMO6.T3.top.051017<br />MDS1:  3.0241213<br />MDS2:  0.296801198","site.type: D6.mineral<br />site.type: D6.mineral<br />sample_id: 19.DeMMO6.T4.top.051017<br />MDS1:  2.6366205<br />MDS2:  0.347789426","site.type: D6.mineral<br />site.type: D6.mineral<br />sample_id: 21.DeMMO6.T5.top.051017<br />MDS1:  2.8588556<br />MDS2: -0.444698596"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(255,98,188,1)","opacity":0.8,"size":7.55905511811024,"symbol":"triangle-up","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)"}},"hoveron":"points","name":"D6.mineral","legendgroup":"D6.mineral","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-2.81854864669237,3.80214329004396],"tickmode":"array","ticktext":["-2","0","2"],"tickvals":[-2,0,2],"categoryorder":"array","categoryarray":["-2","0","2"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"MDS1","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-5.1440562698227,2.07616035201362],"tickmode":"array","ticktext":["-4","-2","0","2"],"tickvals":[-4,-2,0,2],"categoryorder":"array","categoryarray":["-4","-2","0","2"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"MDS2","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.913385826771654},"annotations":[{"text":"site.type","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"d7161673896f":{"shape":{},"colour":{},"label":{},"x":{},"y":{},"type":"scatter"}},"cur_data":"d7161673896f","visdat":{"d7161673896f":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Now we have a nice interactive plot for exploring the ordination. Easy-peasy! 😎</p>
+<a class="github-button" href="https://github.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms" data-icon="octicon-repo-forked" aria-label="Fork ntkme/github-buttons on GitHub">Fork Me</a>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </div>
+
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="../../tag/ggplot/">ggplot</a>
+  
+  <a class="badge badge-light" href="../../tag/plotly/">plotly</a>
+  
+  <a class="badge badge-light" href="../../tag/tidyverse/">tidyverse</a>
+  
+  <a class="badge badge-light" href="../../tag/vegan/">vegan</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/making_figs_2/&amp;text=Making%20figures%20for%20microbial%20ecology:%20Interactive%20NMDS%20plots" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/making_figs_2/&amp;t=Making%20figures%20for%20microbial%20ecology:%20Interactive%20NMDS%20plots" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Making%20figures%20for%20microbial%20ecology:%20Interactive%20NMDS%20plots&amp;body=/post/making_figs_2/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/making_figs_2/&amp;title=Making%20figures%20for%20microbial%20ecology:%20Interactive%20NMDS%20plots" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Making%20figures%20for%20microbial%20ecology:%20Interactive%20NMDS%20plots%20/post/making_figs_2/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/making_figs_2/&amp;title=Making%20figures%20for%20microbial%20ecology:%20Interactive%20NMDS%20plots" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="../../author/avatar_hu22b40f80507c44dce75a10e55d535ea1_60925_270x270_fill_q90_lanczos_center.jpg" alt="">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="../../"></a></h5>
+        
+        
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="../../#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/DeepSubsurfer" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?hl=en&amp;user=z1eLutEAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/caitlincasar" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+<section id="comments">
+  
+    <div id="commento"></div>
+
+<script src="https://cdn.commento.io/js/commento.js" defer></script>
+
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="../../js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="../../privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="../../terms/">Terms</a>
+    
+  </p>
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
