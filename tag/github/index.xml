@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>github | Caitlin Casar</title>
+    <link>/tag/github/</link>
+      <atom:link href="/tag/github/index.xml" rel="self" type="application/rss+xml" />
+    <description>github</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 09 Jun 2020 21:14:16 -0500</lastBuildDate>
+    <image>
+      <url>/images/icon_hu65d040ff31842b946eaf5b8caef82e07_3065_512x512_fill_lanczos_center_2.png</url>
+      <title>github</title>
+      <link>/tag/github/</link>
+    </image>
+    
+    <item>
+      <title>Create your own site with blogdown in R</title>
+      <link>/post/blogdown/</link>
+      <pubDate>Tue, 09 Jun 2020 21:14:16 -0500</pubDate>
+      <guid>/post/blogdown/</guid>
+      <description>
+
+
+&lt;p&gt;Members of the Earth and Planetary Sciences department at Northwestern University are teaming up to spread awareness about diversity and inclusion in support of the Black Lives Matter movement! My contrubution to this effort is creating a space for sharing relevant content and discussion on the web. In addition to creating the site, I want to empower the NU EPS community to contribute to the blog through this tutorial. If you’re not a member of the NU EPS community, this tutorial can help you create your own site and get familiar with the basic functions in Git!&lt;/p&gt;
+&lt;div id=&#34;getting-started-with-git-and-github&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Getting started with Git and Github&lt;/h2&gt;
+&lt;p&gt;The first thing we need to do is get set up to collaborate on Github. If you’re not familiar with Github, it’s a Git repository hosting service that also provides version control and collaboration features. Git is the version control system that tracks changes in your files and makes it easy to update your repository on Github. If this doesn’t make sense now, that’s ok! Once you see Git and Github in action it should be clear why we’re using it.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+Install &lt;a href=&#34;https://www.linode.com/docs/development/version-control/how-to-install-git-on-linux-mac-and-windows/&#34;&gt;Git&lt;/a&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;
+Next, create an account on &lt;a href=&#34;https://github.com/&#34;&gt;Github&lt;/a&gt;. If you set up a student account, you’ll have access to private repositories (i.e. if you need to backup unpublished data or code) - I highly recommend this!
+&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;
+Now, you’ll need to set your credentials in Git. Open up your Mac terminal or &lt;a href=&#34;https://www.atlassian.com/git/tutorials/git-bash&#34;&gt;gitbash&lt;/a&gt; on PC, then use the git config commands to configure your username and email. This will ensure that you have the ability to modify repositories on Github.
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;#set your user name on github
+git config --global user.name &amp;quot;John Doe&amp;quot;
+
+#set your user email on github
+git config --global user.email johndoe@example.com&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+Now, clone the repo I created for the NU Earth Grads site by typing this into your terminal or gitbash:
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;git clone https://github.com/NUEarthGrads/blogdown&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+The top four commands you’ll need to use git are &lt;em&gt;status&lt;/em&gt;, &lt;em&gt;add&lt;/em&gt;, &lt;em&gt;commit&lt;/em&gt;, and &lt;em&gt;push&lt;/em&gt;. Here’s an example of how to use these - we’ll come back to this in a bit.
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;#check the status of your local repo
+git status 
+
+#add all new untracked files to the queue
+git add .
+
+#commit your changes and add a short description
+git commit -a -m &amp;quot;short description here&amp;quot;
+
+#push your changes to the repo on the Github server
+git push &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;blogdown&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Blogdown&lt;/h2&gt;
+&lt;p&gt;To create the site, I used a package in R called &lt;a href=&#34;https://bookdown.org/yihui/blogdown/&#34;&gt;Blogdown&lt;/a&gt;. This is a great package that makes it really easy to create and update your site using R markdown. If you’re using RStudio with blogdown, you can serve the site locally and preview it right in your RStudio viewer window. It’s super easy to customize your CSS (cascading style sheet) - this is an easy way to change the styling of HTML elements across your site, such as font styles or colors. Blogdown integrates Hugo, a static site generator that has tons of awesome themes ready to go! For this site, I chose the Hugo Academic theme. I’ll walk you through the basics of blogdown, then show you how to create a new blog post!&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+Install &lt;a href=&#34;https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu&#34;&gt;R and Rstudio&lt;/a&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;
+Install the blogdown package. You can do this in RStudio by entering the following in the console window in the bottom panel:
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;blogdown&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+To use Hugo in blogdown, install Hugo:
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;blogdown::install_hugo()&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+To generate the Hugo academic theme template site, run the following line in your RStudio console. &lt;strong&gt;Note&lt;/strong&gt; Do not do this if you are updating the NU Earth Grads site, only do this to create a brand new site!
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;blogdown::new_site(theme = &amp;#39;gcushen/hugo-academic&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+To preview your site in the Viewer window, you can either select “Serve site” from the Addins dropdown menu in RStudio, or run the following in your console:
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;blogdown::serve_site()&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;6&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+When you are ready to build your site to HTML format for web hosting, run the following in your console:
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;blogdown::hugo_build(local=T)&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;7&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+If you want version control of the code used to generate your site, you can create a Github repo by running the following in your terminal:
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;#change directories to the blodgown directory you created. For example, if you have a directory called &amp;quot;blogdown_site&amp;quot; on your desktop:
+cd ~/Desktop/blogdown_site
+
+#initialize a git repository in the directory 
+git init
+
+#add all the files to the queue
+git add .
+
+#commit the changes and add a short message
+git commit -a -m &amp;quot;init commit&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+Now you have a local repository. In order to host that repo on Github, go to github.com and create a new repository by clicking the green “new” button in the top right. Don’t initialize a README file. Give your repo a name, for example “my_website”. Then click “Create repository” at the bottom.
+&lt;/p&gt;
+&lt;p&gt;
+In your terminal, run the following:
+&lt;/p&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;#push your repo to the Github server - note that &amp;#39;username&amp;#39; should be replaced with your Github username and &amp;#39;my_website&amp;#39; should be replaced with the name of the repo you created on Github.
+git remote add origin https://github.com/username/my_website
+
+git push -u origin master&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;8&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;
+If you created a brand new site and want to host it online, I recommend hosting it on &lt;a href=&#34;https://pages.github.com/&#34;&gt;Github Pages&lt;/a&gt; - it’s free!
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;
+First you’ll need to create a new repo named &lt;em&gt;username.github.io&lt;/em&gt;. Don’t initialize it with a README file. To create the NU EPS site, I created a repo using the organization name NUEarthGrads on Github called NUEarthGrads.github.io. You can see this repo &lt;a href=&#34;https://github.com/NUEarthGrads&#34;&gt;here&lt;/a&gt;.
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;
+Next, initialize a repo in your public folder in your blogdown directory and push the repo to your github.io repo:
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;bash&#34;&gt;&lt;code&gt;#change directories into your public folder - this is where the site builds to when you run blogdown::hugo_build(local=T)
+cd ~/Desktop/blogdown_site/public
+
+#initialize a git repository in the directory 
+git init
+
+#add all the files to the queue
+git add .
+
+#commit the changes and add a short message
+git commit -a -m &amp;quot;init commit&amp;quot;
+
+#push your repo to the github server
+git remote add origin https://github.com/username/username.github.io
+
+git push -u origin master&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+To view your site, go to &lt;a href=&#34;https://username.github.io/&#34; class=&#34;uri&#34;&gt;https://username.github.io/&lt;/a&gt; in your web browser.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;create-a-new-post&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Create a new post&lt;/h2&gt;
+&lt;p&gt;
+We’re finally ready to create a new post! If you cloned the NUEarthGrads repo, open that folder and double click on the blogdown.Rproj file to open the project in RStudio.
+&lt;/p&gt;
+&lt;p&gt;
+Run the following in your RStudio console:
+&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#run the blogdown new_post function to generate a new markdown file in the post directory with today&amp;#39;s date
+blogdown::new_post(title = &amp;quot;my blog post title&amp;quot;, subdir=&amp;quot;post/my_blog_post_directory&amp;quot;, date = &amp;quot;June 9 2020&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+The Hugo academic theme will add an image next to your post on the home page. To do this, add the image you want to be associated with your post inside the new directory you just created - in this example the directory is called “my_blog_post_directory”. Name the image “featured”, as in “featured.jpg”. Then, rename your new markdown file “index”, as in “index.Rmd”.
+&lt;/p&gt;
+&lt;p&gt;
+Open up the markdown file you just created. You should see something like this:
+&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;---
+title: my blog post title
+author: ~
+date: June 9 2020
+slug: June 9 2020-my blog post title
+categories: [] #add categories for your post inside the brackets
+tags: [] #add tags inside the brackets
+subtitle: &amp;#39;&amp;#39;
+summary: &amp;#39;&amp;#39;
+authors: [] #add your name inside these brackets to indicate who authored the post
+lastmod: &amp;#39;2020-06-09T15:36:45-05:00&amp;#39;
+featured: no
+image:
+  caption: &amp;#39;&amp;#39;
+  focal_point: &amp;#39;&amp;#39;
+  preview_only: no
+projects: []
+---&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+Here’s an exaple of how to modify this header:
+&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;---
+title: my blog post title
+author: ~
+date: June 9 2020
+slug: June 9 2020-my blog post title
+categories: [&amp;quot;Diversity&amp;quot;] #add categories for your post inside the brackets
+tags: [&amp;quot;#BLM&amp;quot;, &amp;quot;equity&amp;quot;] #add tags inside the brackets
+subtitle: &amp;#39;This is my post!&amp;#39;
+summary: &amp;#39;Some info here about this post...This is what will be displayed on the home page.&amp;#39;
+authors: [Caitlin] #add your name inside these brackets to indicate who authored the post
+lastmod: &amp;#39;2020-06-09T15:36:45-05:00&amp;#39;
+featured: no
+image:
+  caption: &amp;#39;&amp;#39;
+  focal_point: &amp;#39;&amp;#39;
+  preview_only: no
+projects: []
+---&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+Now you’re ready to add content to your post. Add Rmarkdown formatted text below the header in your markdown file, including images, hyperlinks, plots, code chunks, videos, and more! Here’s an example of some basic content:
+&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;---
+title: my blog post title
+author: ~
+date: June 9 2020
+slug: June 9 2020-my blog post title
+categories: [&amp;quot;Diversity&amp;quot;] #add categories for your post inside the brackets
+tags: [&amp;quot;#BLM&amp;quot;, &amp;quot;equity&amp;quot;] #add tags inside the brackets
+subtitle: &amp;#39;This is my post!&amp;#39;
+summary: &amp;#39;Some info here about this post...This is what will be displayed on the home page.&amp;#39;
+authors: [Caitlin] #add your name inside these brackets to indicate who authored the post
+lastmod: &amp;#39;2020-06-09T15:36:45-05:00&amp;#39;
+featured: no
+image:
+  caption: &amp;#39;&amp;#39;
+  focal_point: &amp;#39;&amp;#39;
+  preview_only: no
+projects: []
+---
+  
+Hello! This is my *first* blog post! I am **very** excited to share my post with you. I learned how to make this post [here](https://caitlincasar.com/post/blogdown/). 
+
+## Subheader
+
+This is a new section under a subheader. I can make an ordered list:
+1. This is item 1
+2. This is item 2
+3. And this is item 3!&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://rmarkdown.rstudio.com/authoring_basics.html&#34;&gt;This&lt;/a&gt; is great resource for more of the Rmarkdown basics.
+&lt;/p&gt;
+&lt;p&gt;
+Once you’re done creating your post, just push your changes to Github and you’re done!
+&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#change directories into your public folder - this is where the site builds to when you run blogdown::hugo_build(local=T)
+cd ~/Desktop/NUEarthGrads/public
+
+#add the new file
+git add .
+
+#commit the changes 
+git commit -a -m &amp;quot;adding Caitlin&amp;#39;s new blog post&amp;quot;
+
+#push the changes to the Github server
+git push&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now you can see your awesome new post online! Hooray! 🐸&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
