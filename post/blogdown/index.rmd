@@ -252,7 +252,8 @@ git commit -a -m "adding Caitlin's new blog post"
 git push
 ```
 
-Now you can see your awesome new post online! Hooray! `r emo::ji("frog")`
+<p>Now you can see your awesome new post online! Hooray! `r emo::ji("frog")`</p>
+<p>Feel free to comment below with any comments/questions!</p>
 
 
 
