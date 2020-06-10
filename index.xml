@@ -272,6 +272,9 @@ Once youâ€™re done creating your post, just push your changes to Github and youâ
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#change directories into your public folder - this is where the site builds to when you run blogdown::hugo_build(local=T)
 cd ~/Desktop/NUEarthGrads/public
 
+#pull in any changes that others may have pushed to Github
+git pull
+
 #add the new file
 git add .
 

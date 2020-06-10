@@ -242,6 +242,9 @@ This is a new section under a subheader. I can make an ordered list:
 #change directories into your public folder - this is where the site builds to when you run blogdown::hugo_build(local=T)
 cd ~/Desktop/NUEarthGrads/public
 
+#pull in any changes that others may have pushed to Github
+git pull
+
 #add the new file
 git add .
 
