@@ -1,0 +1,1147 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Are you curious what sorts of metabolic processes might be occurring at your study site? Using in situ geochemical data, you can model the Gibbs free energy available from metabolic reactions and predict which metabolisms are energetically favorable!">
+
+  
+  <link rel="alternate" hreflang="en-us" href="../../post/thermodynamic_modeling/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="rgba(255,202,51, 1)">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="../../css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131131266-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-131131266-2', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="../../index.webmanifest">
+  <link rel="icon" type="image/png" href="../../images/icon_hu65d040ff31842b946eaf5b8caef82e07_3065_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="../../images/icon_hu65d040ff31842b946eaf5b8caef82e07_3065_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="../../post/thermodynamic_modeling/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@DeepSubsurfer">
+  <meta property="twitter:creator" content="@DeepSubsurfer">
+  
+  <meta property="og:site_name" content="Caitlin Casar">
+  <meta property="og:url" content="/post/thermodynamic_modeling/">
+  <meta property="og:title" content="Thermodynamic Modeling with CHNOSZ | Caitlin Casar">
+  <meta property="og:description" content="Are you curious what sorts of metabolic processes might be occurring at your study site? Using in situ geochemical data, you can model the Gibbs free energy available from metabolic reactions and predict which metabolisms are energetically favorable!"><meta property="og:image" content="/post/thermodynamic_modeling/featured.jpeg">
+  <meta property="twitter:image" content="/post/thermodynamic_modeling/featured.jpeg"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-06-12T21:14:16-05:00">
+    
+    <meta property="article:modified_time" content="2020-06-12T21:14:16-05:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/thermodynamic_modeling/"
+  },
+  "headline": "Thermodynamic Modeling with CHNOSZ",
+  
+  "image": [
+    "/post/thermodynamic_modeling/featured.jpeg"
+  ],
+  
+  "datePublished": "2020-06-12T21:14:16-05:00",
+  "dateModified": "2020-06-12T21:14:16-05:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caitlin Casar",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/logo_hu72029ba191613179bebc9dcbb012e0bd_27617_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "Are you curious what sorts of metabolic processes might be occurring at your study site? Using in situ geochemical data, you can model the Gibbs free energy available from metabolic reactions and predict which metabolisms are energetically favorable!"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+<title>Thermodynamic Modeling with CHNOSZ - Caitlin Casar</title>
+<meta property="og:title" content="Thermodynamic Modeling with CHNOSZ - Caitlin Casar">
+<meta property="og:type" content="article">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="http://xvrdm.github.io/images/logo.png" >
+  
+  
+
+<meta property="description" content="Generate thermodynamic models for metabolic reactions under in situ conditions.">
+<meta property="og:description" content="Generate thermodynamic models for metabolic reactions under in situ conditions.">
+
+
+<meta name="twitter:creator" content="">
+<meta name="twitter:site" content="">
+
+<script src="//yihui.org/js/math-code.js"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script async>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: false,
+    packages: {'[+]': ['noerrors']}
+  },
+  loader: {
+    load: ['[tex]/noerrors']
+  }
+};  
+</script>
+
+
+
+  <title>Thermodynamic Modeling with CHNOSZ | Caitlin Casar</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="../../index.html"><img src="https://www.pizzanecklaces.com/wp-content/uploads/2019/12/split.gif" alt="Caitlin Casar">
+        <span class="text">Caitlin Casar</span>  
+        </a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="../../">Caitlin Casar</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../about/about/index.html"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../index.html#posts"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../index.html#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../index.html#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="../../files/Casar_CV_May2020.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      <li class="nav-item">
+        <a href="https://www.buymeacoffee.com/aArveHBGx">
+          <i class="fas fa-coffee coffee"></i>
+        </a>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link js-theme-selector">
+          <i class="fas fa-moon js-set-theme-dark"></i>
+          <i class="fas fa-sun js-set-theme-light"></i>
+        </a>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>Thermodynamic Modeling with CHNOSZ</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jun 12, 2020
+  </span>
+  
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="../../category/r/">R</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 500px;">
+  <div style="position: relative">
+    <img src="../../post/thermodynamic_modeling/featured.jpeg" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+<script src="../../rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="../../rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="../../rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+
+<p>
+Are you curious what sorts of metabolic processes might be occurring at your study site? Using in situ geochemical data, you can model the Gibbs free energy available from metabolic reactions and predict which metabolisms are energetically favorable! Gibbs free energy can be modeled using the following equation:
+</p>
+<p><span class="math display">\[\Delta G_r - RT ln \frac{K_r}{Q_r }\]</span></p>
+<p>
+where <span class="math inline">\(\Delta G_r\)</span> is the Gibbs energy of reaction <em>r</em> under in situ conditions, <span class="math inline">\(K_r\)</span> and <span class="math inline">\(Q_r\)</span> are the equillibrium constant and activity product of the <em>r</em>th reaction, R is the gas constant, and T is temperature in Kelvin.
+</p>
+<p>
+<span class="math inline">\(Q_r\)</span> can be calculated using the following equation:
+</p>
+<span class="math display">\[Q_r = \prod a_i ^{v_{i,r}}\]</span>
+<p>
+where <span class="math inline">\(a_i\)</span> is the activity of the <em>i</em>th species and <span class="math inline">\(v_{i,r}\)</span> is the stoichiometric coefficient of the <em>i</em>th species in the <em>r</em>th reaction.
+</p>
+<p>
+For this tutorial I’m using data and code from my <a href="https://caitlincasar.com/publication/casar2020/">publication</a> in <em>Geobiology</em>. We calculated activity coefficients for each species of interest using Spece8 in <a href="https://www.gwb.com/">Geochemist’s Workbench</a> using geochemical data collected from our field site. Then we used the <a href="https://www.chnosz.net/">CHNOSZ</a> package to calculate Gibbs free energy of various metabolic reactions. First, let’s check out what the activity data looks like.
+</p>
+<pre class="r"><code>#load tidyverse library
+pacman::p_load(tidyverse)
+
+activities &lt;- read_csv(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO_SpecE8_aqueousGas.csv&quot;)</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/thermodynamic_modeling/index_files/figure-html//widgets/widget_unnamed-chunk-2.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>
+You can see we calculated activites for Ca<sup>2+</sup>, acetate, CH<sub>4</sub>, Fe<sup>2+</sup>, H<sup>+</sup>, HCO<sub>3</sub><sup>-</sup>, HS<sup>-</sup>, Mn<sup>2+</sup>, NH<sub>4</sub><sup>+</sup>, NO<sub>2</sub><sup>-</sup>, NO<sub>3</sub><sup>-</sup>, and SO<sub>4</sub><sup>2-</sup> at six different sites called DeMMO1-6.
+</p>
+<p>
+Once you have your activity coefficients, then you need to decide what reactions you want to model. I was interested in metabolic reactions with minerals, so I created a spreadsheet of balanced reactions with minerals and aqueous species available in situ. Let’s load this data and preview it here.
+</p>
+<pre class="r"><code>#import DeMMO mineral reactions
+reactions &lt;- read_csv(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/reactions_aq_gas.csv&quot;) %&gt;%
+  filter(!product.f == &quot;manganite&quot;) #removing reactions with manganite because we don&#39;t have equation of state data for this </code></pre>
+<div id="htmlwidget-2" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/post/thermodynamic_modeling/index_files/figure-html//widgets/widget_unnamed-chunk-4.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>
+The formatting of this data is important for compatability with CHNOSZ, so make sure you include the details I’m showing here when you balance your reactions. Notice that the reactant stoichiometric coefficients are negative because they’re on the left side of the reaction, while products are positive because they’re on the right side of the reaction. Now we’re ready to model Gibbs free energy from these reactions in CHNOSZ! First we’ll load the CHNOSZ library.
+</p>
+<pre class="r"><code>#load the CHNOSZ library
+pacman::p_load(CHNOSZ)</code></pre>
+<p>Let’s take a look at the available species for modeling reactions in the CHNOSZ database:</p>
+<pre class="r"><code>thermo_db &lt;- thermo()$obigt %&gt;% as_tibble()</code></pre>
+<div id="htmlwidget-3" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/post/thermodynamic_modeling/index_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>A few minerals that I was interested in were missing in the database, but that’s ok! If you have the Gibbs free energy available at stadard conditions and the equation of state data for your reactant, you can add it to the CHNOSZ database. Let’s add pyrolusite and ferrihydrite with the mod.obigt function!</p>
+<pre class="r"><code>#add pyrolusite to database
+pyrolusite &lt;- mod.obigt(&quot;pyrolusite&quot;, G=-111100, H=-124283, S=12.61, V=17.3, formula=&quot;MnO2&quot;, state=&quot;cr&quot;, a1.a=12.55, a2.b=9.761, a3.c=-2.105)
+
+#add ferrihydrite to database
+ferrihydrite &lt;- mod.obigt(&quot;ferrihydrite&quot;, G=-111200, H=-127800, S=16.7, V=20.88, formula=&quot;FeOOH&quot;, state=&quot;cr&quot;, a1.a=8.70, a2.b=36.71, a3.c=-1.0146)</code></pre>
+<p>You can set your temperature and energy units like this:</p>
+<pre class="r"><code>#set temperature units to Kelvin
+T.units(&quot;K&quot;)
+
+#set energy units to joules
+E.units(&quot;J&quot;)</code></pre>
+<p>Let’s calculate logK:</p>
+<pre class="r"><code>logK &lt;- reactions %&gt;%
+  pivot_longer(reactant.a:state.i,
+               names_to = c(&quot;.value&quot;, &quot;set&quot;),
+               names_pattern = &quot;(.+).(.+)&quot;) %&gt;% #pivot from wide to long dataframe
+  unite(&quot;react_prod&quot;, reactant:product, na.rm = TRUE, remove = F) %&gt;% #unite the reactants and products into one column 
+  filter(!react_prod == &quot;&quot;) %&gt;% #remove any rows with missing react_prod values
+  group_by(rxn.number) %&gt;% #group by reaction number for calculations
+  summarise(DeMMO1 = subcrt(react_prod, coeff, state, T=283.45)$out$logK,#calculate logK using in situ DeMMO1 temperature for all other reactions 
+         DeMMO2 = subcrt(react_prod, coeff, state, T=285.55)$out$logK,
+         DeMMO3 = subcrt(react_prod, coeff, state, T=289.35)$out$logK,
+         DeMMO4 = subcrt(react_prod, coeff, state, T=295.65)$out$logK,
+         DeMMO5= subcrt(react_prod, coeff, state, T=304.85)$out$logK,
+         DeMMO6 = subcrt(react_prod, coeff, state, T=294.65)$out$logK) %&gt;%
+  pivot_longer(cols = DeMMO1:DeMMO6, names_to = &quot;Site&quot;, values_to = &quot;LogK&quot;) %&gt;% #pivot from wide to long for merging later 
+  distinct() #remove the duplicate rows </code></pre>
+<p>Now we need to calculate logQ:</p>
+<pre class="r"><code>activities &lt;- activities %&gt;%
+  pivot_longer(`Ca+2`:CO, names_to = &quot;react_prod&quot;, values_to = &quot;activity&quot;) #pivot from wide to long for joining
+
+logQ &lt;- reactions %&gt;%
+  pivot_longer(reactant.a:state.i,
+               names_to = c(&quot;.value&quot;, &quot;set&quot;),
+               names_pattern = &quot;(.+).(.+)&quot;) %&gt;% #pivot from wide to long 
+  unite(&quot;react_prod&quot;, reactant:product, na.rm = TRUE, remove = F) %&gt;% #unite the reactant and product columns into one column called react_prod 
+  left_join(activities) %&gt;% #join with the activities data 
+  filter(!is.na(activity)) %&gt;% #remove any activities with NA values 
+  mutate(logQ = if_else(!is.na(reactant), -abs(coeff)*activity, abs(coeff)*activity)) %&gt;% #multiply each species by its stoichiometric coefficient 
+  group_by(rxn.number, Site) %&gt;% #group on the reaction number and site 
+  summarise(logQ = sum(logQ)) #calculate logQ </code></pre>
+<p>Finally, it’s time to calculate Gibbs free energy yield from each reaction!</p>
+<pre class="r"><code>deltaG &lt;- logK %&gt;%
+  left_join(logQ) %&gt;% #join the logK and logQ tables 
+  left_join(reactions %&gt;% select(rxn.number, e.transfer, reactant.a)) %&gt;% #add the reaction number, number of electrons transferred, and minerals from each reaction 
+  rename(mineral = &quot;reactant.a&quot;) %&gt;% #rename reactant.a to mineral for clarity 
+  mutate(deltaG = (-2.303*8.314*283.45*(LogK-logQ))/(e.transfer*1000)) #calculate deltaG for each reaction at each site </code></pre>
+<p>Lets’s take a look at the deltaG table:
+<div id="htmlwidget-4" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"url":"/post/thermodynamic_modeling/index_files/figure-html//widgets/widget_unnamed-chunk-13.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script></p>
+<p>Now, let’s plot the data and see which metabolic reactions with minerals are energetically favorable under in situ conditions at DeMMO:</p>
+<pre class="r"><code>deltaG %&gt;%
+  ggplot(aes(deltaG, reorder(rxn.number, -deltaG), shape=Site, group=rxn.number)) +
+  theme_gray() +
+  geom_line(aes(color=mineral), size=2.5, alpha=0.6) + #color each line spanning the deltaG values for the six sites by the mineral in the reaction
+  geom_point() + 
+  scale_shape_manual(values = c(0,1,2,15,16,17)) + #manually set the shapes for each point to denote the six different sites 
+  scale_x_reverse() + #reverse the x-axis to show exergonic values on the right, this is standard for this kind of data
+  labs(x=expression(Delta~G[r]~&#39;kJ/mol&#39;~e^{textstyle(&quot;-&quot;)})) + #generate the axis labels
+  ylab(&quot;Reaction #&quot;) +
+  geom_vline(xintercept = 0, linetype=&quot;dotted&quot;, color = &quot;black&quot;) + #add a vertical line at zero for reference 
+  theme(legend.position = c(.1, .6), legend.text=element_text(size=8), legend.title = element_text(size=8, face=&quot;bold&quot;)) + #position the legend on the left 
+  theme(legend.key.size =  unit(0.2, &quot;in&quot;)) #resize the legend to make it fit </code></pre>
+<p><img src="../../post/thermodynamic_modeling/index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Everything that plots to the right of the dotted line is exergonic, while everything to the left of the dotted line is endergonic. The most exergonic and therefore the most energetically favorable reactions occur with the mineral pyrolusite, followed by pyrite. If you’re curious which reactant was coupled to these minerals for each reaction, refer back to the reactions table above! 👩‍🔬</p>
+<a class="github-button" href="https://github.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms" data-icon="octicon-repo-forked" aria-label="Fork ntkme/github-buttons on GitHub">Fork Me</a>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </div>
+
+    
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="../../tag/chnosz/">CHNOSZ</a>
+  
+  <a class="badge badge-light" href="../../tag/ggplot/">ggplot</a>
+  
+  <a class="badge badge-light" href="../../tag/tidyverse/">tidyverse</a>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="../../author/avatar_hu22b40f80507c44dce75a10e55d535ea1_60925_270x270_fill_q90_lanczos_center.jpg" alt="">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="../../"></a></h5>
+        
+        
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="../../#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/DeepSubsurfer" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.co.uk/citations?hl=en&amp;user=z1eLutEAAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/caitlincasar" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+<section id="comments">
+  
+    <div id="commento"></div>
+
+<script src="https://cdn.commento.io/js/commento.js" defer></script>
+
+  
+</section>
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="../../js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+
+
+ 
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

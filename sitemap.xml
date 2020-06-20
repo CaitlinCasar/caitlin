@@ -22,12 +22,47 @@
   </url>
   
   <url>
-    <loc>/tag/blogdown/</loc>
-    <lastmod>2020-06-09T21:14:16-05:00</lastmod>
+    <loc>/categories/</loc>
+    <lastmod>2020-06-12T21:14:16-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/tag/chnosz/</loc>
+    <lastmod>2020-06-12T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/ggplot/</loc>
+    <lastmod>2020-06-12T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-06-12T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/category/r/</loc>
+    <lastmod>2020-06-12T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-06-12T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/thermodynamic_modeling/</loc>
+    <lastmod>2020-06-12T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/tidyverse/</loc>
+    <lastmod>2020-06-12T21:14:16-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/blogdown/</loc>
     <lastmod>2020-06-09T21:14:16-05:00</lastmod>
   </url>
   
@@ -52,37 +87,12 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2020-06-09T21:14:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/category/r/</loc>
-    <lastmod>2020-06-09T21:14:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-06-09T21:14:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/ggplot/</loc>
-    <lastmod>2020-06-01T21:14:16-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/post/making_figs_2/</loc>
     <lastmod>2020-06-01T21:14:16-05:00</lastmod>
   </url>
   
   <url>
     <loc>/tag/plotly/</loc>
-    <lastmod>2020-06-01T21:14:16-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/tidyverse/</loc>
     <lastmod>2020-06-01T21:14:16-05:00</lastmod>
   </url>
   
