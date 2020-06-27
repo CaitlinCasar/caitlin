@@ -1,0 +1,3 @@
+"0","#make shape dictionary for ploting "
+"0","shape_dict <- c(0, 15, 15, 1, 19, 19, 2, 17, 17, 5, 5)"
+"0","names(shape_dict) <- c(""D1.fluid"", ""D1.inert.control"", ""D1.mineral"", ""D3.fluid"", ""D3.inert.control"", ""D3.mineral"", ""D6.fluid"", ""D6.inert.control"", ""D6.mineral"",""D3.cont.control"", ""ambient.control"")"

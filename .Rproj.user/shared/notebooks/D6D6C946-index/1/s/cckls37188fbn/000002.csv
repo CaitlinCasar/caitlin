@@ -1,0 +1,4 @@
+"0","taxon_abundance_table <- abundance_table %>%"
+"0","  left_join(taxonomy) %>%"
+"0","  filter(sample_id %in% barplot_samples & level == ""phylum"") %>%"
+"0","  mutate(taxonomy = if_else(is.na(taxonomy), ""Unassigned"", taxonomy))"

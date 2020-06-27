@@ -1,0 +1,64 @@
+---
+title: "Making figures for microbial ecology: Interactive NMDS plots"
+author: "Caitlin"
+date: 2020-06-01T21:14:16-05:00
+output: html_document
+thumbnail: "images/NMDS_plot.jpeg"
+categories: ["R"]
+tags: ["ggplot", "tidyverse", "plotly", "vegan"]
+twitterImg: /images/NMDS_plot.jpeg
+description: "Learn to create an interactive NMDS plot in R."
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+
+<p>This is the one of several tutorials I’m putting together for making figures that are common in microbial ecology. Today we’ll create an interactive NMDS plot for exploring your microbial community data. NMDS, or Nonmetric Multidimensional Scaling, is a method for dimensionality reduction. This works great for high demensional datasets like microbial communities and makes it visually easy to compare lots of communities to each other. We’re using NMDS rather than PCA (principle coordinates analysis) because this method can accomodate the Bray-Curtis dissimilarity distance metric, which is better suited for our community data than Euclidean distance. For this tutorial I’m using data and code from my <a href="https://caitlincasar.com/publication/casar2020/">publication</a> in <em>Geobiology</em>.</p>
+<p>First we’ll need to set up our environment in R:</p>
+<pre class="r"><code>#load libraries 
+pacman::p_load(tidyverse, plotly, vegan)</code></pre>
+<p>Next, read the OTU data into a dataframe. We can pull the data directy from Github by reading the raw file. You can preview the data in the table below this code chunk.</p>
+<pre class="r"><code>#read the data into a dataframe
+otu_table &lt;- read_delim(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO136_Dec2015toApril2018_noChimera_otuTable_withTaxa_d10000.txt&quot;, delim=&quot;\t&quot;, comment = &quot;# &quot;)
+
+metadata &lt;- read_csv(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/metadata.csv&quot;) </code></pre>
+<div id="htmlwidget-1" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/making_figs_2/index_files/figure-html//widgets/widget_unnamed-chunk-3.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>First we need to normalize our data.</p>
+<pre class="r"><code>otu_norm &lt;- otu_table %&gt;%
+  select(-taxonomy) %&gt;%
+  mutate_at(vars(-`#OTU ID`), funs(./sum(.)*100)) %&gt;% #normalize to relative abundance 
+  gather(sample_id, abundance, `7.DeMMO1.Steri.050917`:`18.800.DitchFluid.041818`) %&gt;%
+  spread(key = `#OTU ID`,value = &#39;abundance&#39;) %&gt;%
+  right_join(metadata %&gt;% select(sample_id)) %&gt;%
+  column_to_rownames(&quot;sample_id&quot;)</code></pre>
+<p>Now, let’s use the metaMDS function in vegan to perform NMDS. We’ll use the default distance metric, Bray-Curtis dissimilarity, and set the argument k to 2 dimensions.</p>
+<pre class="r"><code>NMDS_ord &lt;- otu_norm %&gt;%
+  metaMDS(k=2)</code></pre>
+<p>Now let’s pull out the NMDS coordinates for axes MDS1 and MDS2 for plotting purposes.</p>
+<pre class="r"><code>#pull out ordination and vector coordinates for plotting
+NMDS_coords &lt;- NMDS_ord[[&quot;points&quot;]] %&gt;%
+  as_tibble(rownames = &quot;sample_id&quot;) %&gt;%
+  left_join(metadata)</code></pre>
+<p>We can create a dictionary of shapes for our plot like this:</p>
+<pre class="r"><code>#make shape dictionary for ploting 
+shape_dict &lt;- c(0, 15, 15, 1, 19, 19, 2, 17, 17, 5, 5)
+names(shape_dict) &lt;- c(&quot;D1.fluid&quot;, &quot;D1.inert.control&quot;, &quot;D1.mineral&quot;, &quot;D3.fluid&quot;, &quot;D3.inert.control&quot;, &quot;D3.mineral&quot;, &quot;D6.fluid&quot;, &quot;D6.inert.control&quot;, &quot;D6.mineral&quot;,&quot;D3.cont.control&quot;, &quot;ambient.control&quot;)</code></pre>
+<p>Now let’s plot the data!</p>
+<pre class="r"><code>#NMDS plot with controls 
+NMDS_plot &lt;- NMDS_coords %&gt;%
+  ggplot(aes(MDS1, MDS2)) +
+  geom_point(size=2, alpha=0.8, aes(shape=site.type, color=site.type, label = sample_id)) +
+  scale_shape_manual(values=shape_dict) +
+  theme(legend.key.size = unit(.5, &quot;cm&quot;))
+
+
+#visualize interactive plot
+ggplotly(NMDS_plot)</code></pre>
+<iframe src="plot.html" width="100%" height="500" style="border: none;">
+</iframe>
+<p>Now we have a nice interactive plot for exploring the ordination. Easy-peasy! 😎</p>
+<a class="github-button" href="https://github.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms" data-icon="octicon-repo-forked" aria-label="Fork ntkme/github-buttons on GitHub">Fork Me</a>
+<script async defer src="https://buttons.github.io/buttons.js"></script>

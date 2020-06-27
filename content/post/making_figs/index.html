@@ -1,0 +1,103 @@
+---
+title: "Making figures for microbial ecology: Interactive bar plots"
+author: "Caitlin"
+date: 2020-05-31T21:14:16-05:00
+output: html_document
+thumbnail: "bar_plot.jpg"
+categories: ["R"]
+tags: ["ggplot", "tidyverse", "plotly"]
+twitterImg: /images/barplot.jpeg
+description: "Learn to create an interactive bar plot in R."
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+
+<a class="github-button" href="https://github.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms" data-icon="octicon-repo-forked" aria-label="Fork ntkme/github-buttons on GitHub">Fork</a>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<p>This is the first of several tutorials I’m putting together for making figures that are common in microbial ecology. Today we’ll start with an interactive bar plot for exploring your microbial community data. For this tutorial I’m using data and code from my <a href="https://caitlincasar.com/publication/casar2020/">publication</a> in <em>Geobiology</em>. You can fork the repo by clicking the button above!</p>
+<p>To generate the data, we sequenced DNA from microbial communities at our study site DeMMO. The raw sequence data was processed with QIIME to produce an OTU table. OTUs, or operational taxonomic units, are bins that differentiate sequences at a 97% similarity threshold. For our purposes, you can think of an OTU as a species of bacteria or archaea. As a microbial ecologist, you might want to compare the taxonomic compositions of your communities. Let’s make a cool html bar plot to explore our microbial community data!</p>
+<p>Before we get started, you’ll need to set up your environment in R. This code depends on the packages being loaded here:</p>
+<pre class="r"><code>#load libraries 
+pacman::p_load(tidyverse, plotly, randomcoloR)</code></pre>
+<p>Next, read the OTU data into a dataframe. We can pull the data directy from Github by reading the raw file. You can preview the data in the table below this code chunk.</p>
+<pre class="r"><code>#read the data into a dataframe
+otu_table &lt;- read_delim(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO136_Dec2015toApril2018_noChimera_otuTable_withTaxa_d10000.txt&quot;, delim=&quot;\t&quot;, comment = &quot;# &quot;)
+metadata &lt;- read_csv(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/metadata.csv&quot;) 
+
+#store the taxonomy for each OTU
+taxonomy &lt;- otu_table %&gt;%
+  select(`#OTU ID`, taxonomy) %&gt;%
+  mutate(tax = gsub(&quot;Gammaproteobacteria; D_3__Betaproteobacteriales&quot;, &quot;Betaproteobacteria; D_3__Betaproteobacteriales&quot;, taxonomy), #fix taxonomy for Beta&#39;s,
+         taxonomy = str_remove_all(tax, &quot;D_0__| D_1__| D_2__| D_3__| D_4__| D_5__| D_6__&quot;)) %&gt;%
+  separate(taxonomy ,sep=&#39;;&#39;,c(&quot;domain&quot;, &quot;phylum&quot;, &quot;class&quot;, &quot;order&quot;, &quot;family&quot;, &quot;genus&quot;, &quot;species&quot;)) %&gt;%
+  gather(level, taxonomy, domain:species)</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/making_figs/index_files/figure-html//widgets/widget_unnamed-chunk-3.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>We want to look at the community compositions, so first let’s normalize and reshape the data.</p>
+<pre class="r"><code>abundance_table &lt;- otu_table %&gt;%
+  select(-taxonomy) %&gt;%
+  mutate_at(vars(-`#OTU ID`), funs(./sum(.)*100)) %&gt;% #normalize to relative abundance 
+  gather(sample_id, abundance, `7.DeMMO1.Steri.050917`:`18.800.DitchFluid.041818`) </code></pre>
+<div id="htmlwidget-2" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/post/making_figs/index_files/figure-html//widgets/widget_unnamed-chunk-5.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>For plotting purposes, let’s pick a subset of samples.</p>
+<pre class="r"><code>barplot_samples &lt;- c(&quot;12.DeMMO1.steri.041818&quot;, 
+                     &quot;26.DeMMO1.SC1.top.041818&quot;, 
+                     &quot;22.DeMMO1.C.top.041818&quot;,
+                     &quot;23.DeMMO1.D.top.041818&quot;, 
+                     &quot;24.DeMMO1.E.top.041818&quot;,
+                     &quot;27.DeMMO1.SC2.top.041818&quot;, 
+                     &quot;34.DeMMO1.SC10.top.041818&quot;, 
+                     &quot;45.DeMMO1.7.top.041818&quot;,
+                     &quot;46.DeMMO1.8.top.041818&quot;, 
+                     &quot;47.DeMMO1.9.top.041818&quot;,
+                     &quot;14.DeMMO3.steri.041718&quot;, 
+                     &quot;51.DeMMO3.A.top.041718&quot;,
+                     &quot;27.DeMMO3.T8.top.051117&quot;, 
+                     &quot;53.DeMMO3.C.top.041718&quot;, 
+                     &quot;54.DeMMO3.D.top.041718&quot;,
+                     &quot;55.DeMMO3.E.top.041718&quot;, 
+                     &quot;39.DeMMO3.1.top.041718&quot;, 
+                     &quot;40.DeMMO3.2.top.041718&quot;,
+                     &quot;41.DeMMO3.3.top.041718&quot;, 
+                     &quot;56.DeMMO3.F.top.041718&quot;,
+                     &quot;12.DeMMO6.Steri#2.051017&quot;, 
+                     &quot;13.DeMMO6.T1.top.051017&quot;,
+                     &quot;15.DeMMO6.T2.top.051017&quot;, 
+                     &quot;17.DeMMO6.T3.top.051017&quot;,
+                     &quot;19.DeMMO6.T4.top.051017&quot;,
+                     &quot;21.DeMMO6.T5.top.051017&quot;, 
+                     &quot;24.DeMMO6.T6.bottom.051017&quot;) </code></pre>
+<p>Now, let’s take a look at the phylum level abundances for each sample.</p>
+<pre class="r"><code>taxon_abundance_table &lt;- abundance_table %&gt;%
+  left_join(taxonomy) %&gt;%
+  filter(sample_id %in% barplot_samples &amp; level == &quot;phylum&quot;) %&gt;%
+  mutate(taxonomy = if_else(is.na(taxonomy), &quot;Unassigned&quot;, taxonomy))</code></pre>
+<p>Let’s make a custom color palette for our phyla.</p>
+<pre class="r"><code>phylum_color &lt;- distinctColorPalette(k = length(unique(taxon_abundance_table$taxonomy)))
+names(phylum_color) &lt;- unique(taxon_abundance_table$taxonomy)</code></pre>
+<p>And now, let’s create a stacked bar plot for each site.</p>
+<pre class="r"><code>bar_plot &lt;- taxon_abundance_table %&gt;%
+  left_join(metadata) %&gt;%
+  group_by(site, experiment.type, taxonomy) %&gt;%
+  summarise(abundance = sum(abundance)) %&gt;%
+  ungroup() %&gt;%
+  mutate(experiment.type = factor(experiment.type, levels = c(&quot;fluid&quot;, &quot;inert.control&quot;, &quot;pyrolusite&quot;, &quot;pyrite&quot;,&quot;hematite&quot;,&quot;magnetite&quot;,&quot;siderite&quot;,&quot;gypsum&quot;,&quot;muscovite&quot;,&quot;calcite&quot;))) %&gt;%
+  ggplot(aes(fill=taxonomy, y=abundance, x=experiment.type)) +
+  geom_bar(stat=&#39;identity&#39;, position=&#39;fill&#39;) +
+  scale_fill_manual(values=phylum_color) +
+  coord_flip() + 
+  theme(axis.title = element_blank(),
+        legend.title = ggplot2::element_blank(), 
+        legend.text = ggplot2::element_text(size = 8),
+        legend.key.size = unit(0.5, &quot;cm&quot;)) +
+  facet_grid(cols = vars(site), switch = &quot;y&quot;) + 
+  guides(fill = guide_legend(ncol = 1))</code></pre>
+<p>Finally, let’s make it easier to explore our data with an html version of our bar plot!</p>
+<pre class="r"><code>ggplotly(bar_plot)</code></pre>
+<iframe src="plot.html" width="100%" height="500" style="border: none;">
+</iframe>
+<p>Ta da! You now have an interactive html version of your plot that you can view in your web browser - just double click the file in your file explorer and it will automatically open. These files are portable, so you can email them to your collaborators and explore the data together. Stay tuned for upcoming tutorials on making figures for microbial ecology!</p>

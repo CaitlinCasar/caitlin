@@ -1,0 +1,305 @@
+---
+title: "Create your own site with blogdown in R"
+author: "Caitlin"
+date: 2020-06-09T21:14:16-05:00
+output: html_document
+thumbnail: "bar_plot.jpg"
+categories: ["R"]
+tags: ["blogdown", "git", "github", "hugo"]
+twitterImg: /images/barplot.jpeg
+description: "Learn to create your own blog site."
+---
+
+
+
+<p>Wanna create and host your own site for free? I’ll show you how I created and hosted my site caitlincasar.com! We’ll go over the two basic tools I used: the <a href="https://bookdown.org/yihui/blogdown/" target="_blank">blogdown</a> package in R and <a href="https://pages.github.com/" target="_blank">Github Pages</a>.</p>
+<div id="getting-started-with-git-and-github" class="section level2">
+<h2>Getting started with Git and Github</h2>
+<p>The first thing we need to do is get set up on Github. If you’re not familiar with Github, it’s a Git repository hosting service that also provides version control and collaboration features. Git is the version control system that tracks changes in your files and makes it easy to update your repository on Github. If this doesn’t make sense now, that’s ok! Once you see Git and Github in action it should be clear why we’re using it.</p>
+<ol style="list-style-type: decimal">
+<li><p>
+Install <a href="https://www.linode.com/docs/development/version-control/how-to-install-git-on-linux-mac-and-windows/" target="_blank">Git</a>
+</p></li>
+<li><p>
+Next, create an account on <a href="https://github.com/" target="_blank">Github</a>. If you set up a student account, you’ll have access to private repositories (i.e. if you need to backup unpublished data or code) - I highly recommend this!
+</p></li>
+<li><p>
+Now, you’ll need to set your credentials in Git. Open up your Mac terminal or <a href="https://www.atlassian.com/git/tutorials/git-bash" target="_blank">gitbash</a> on PC, then use the git config commands to configure your username and email. This will ensure that you have the ability to modify repositories on Github.
+</p></li>
+</ol>
+<pre class="bash"><code>#set your user name on github
+git config --global user.name &quot;John Doe&quot;
+
+#set your user email on github
+git config --global user.email johndoe@example.com</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>
+The top four commands you’ll need to use git are <em>status</em>, <em>add</em>, <em>commit</em>, and <em>push</em>. Here’s an example of how to use these - we’ll come back to this in a bit.
+</p></li>
+</ol>
+<pre class="bash"><code>#check the status of your local repo
+git status 
+
+#add all new untracked files to the queue
+git add .
+
+#commit your changes and add a short description
+git commit -a -m &quot;short description here&quot;
+
+#push your changes to the repo on the Github server
+git push </code></pre>
+</div>
+<div id="blogdown" class="section level2">
+<h2>Blogdown</h2>
+<p>To create the site, I used a package in R called <a href="https://bookdown.org/yihui/blogdown/" target="_blank">blogdown</a>. This is a great package that makes it really easy to create and update your site using R markdown. If you’re using RStudio with blogdown, you can serve the site locally and preview it right in your RStudio viewer window. It’s super easy to customize your CSS (cascading style sheet) - this is an easy way to change the styling of HTML elements across your site, such as font styles or colors. Blogdown integrates Hugo, a static site generator that has tons of awesome themes ready to go! For this site, I chose the Hugo Academic theme. I’ll walk you through the basics of blogdown, then show you how to create a new blog post!</p>
+<ol style="list-style-type: decimal">
+<li><p>
+Install <a href="https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu" target="_blank">R and Rstudio</a>
+</p></li>
+<li><p>
+Install the blogdown package. You can do this in RStudio by entering the following in the console window in RStudio:
+</p></li>
+</ol>
+<pre class="r"><code>install.packages(&quot;blogdown&quot;)</code></pre>
+<p><img class="post" src="images/blogdown_install.png"></p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>
+To use Hugo in blogdown, install Hugo:
+</p></li>
+</ol>
+<pre class="r"><code>blogdown::install_hugo()</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><p>
+To generate the Hugo academic theme template site, run the following line in your RStudio console.
+</p></li>
+</ol>
+<pre class="r"><code>blogdown::new_site(theme = &#39;gcushen/hugo-academic&#39;)</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li><p>
+To preview your site in the Viewer window, you can either select “Serve site” from the Addins dropdown menu in RStudio, or run the following in your console:
+</p></li>
+</ol>
+<pre class="r"><code>blogdown::serve_site()</code></pre>
+<p><img class="post" src="images/serve_site.png"></p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>
+When you are ready to build your site to HTML format for web hosting, run the following in your console:
+</p></li>
+</ol>
+<pre class="r"><code>blogdown::hugo_build(local=T)</code></pre>
+<p>Check out your Files window in RStudio. You should see a list of files and directories similar to this:</p>
+<p><img class="post" src="images/files.png"></p>
+<p>The content folder contains the markdown files used to build the site. The public folder contains the files generated by the hugo_build function.</p>
+<ol start="7" style="list-style-type: decimal">
+<li><p>
+I version control my code used to generate my site - in case I break something, I can easily revert back to a working version. To do this, create a git repo for your code by running the following in your terminal:
+</p></li>
+</ol>
+<pre class="bash"><code>#change directories to the blodgown directory you created. For example, if you have a directory called &quot;blogdown_site&quot; on your desktop:
+cd ~/Desktop/blogdown_site
+
+#initialize a git repository in the directory 
+git init
+
+#add all the files to the queue
+git add .
+
+#commit the changes and add a short message
+git commit -a -m &quot;init commit&quot;</code></pre>
+<p>
+Now you have a local repository. In order to host that repo on Github, go to github.com and create a new repository by clicking the green “new” button in the top right. Don’t initialize a README file. Give your repo a name, for example “my_website”. Then click “Create repository” at the bottom.
+</p>
+<p><img class="post" src="images/git-1.png"></p>
+<p><img class="post" src="images/git-2.png"></p>
+<p>
+In your terminal, run the following:
+</p>
+<pre class="bash"><code>#push your repo to the Github server - note that &#39;username&#39; should be replaced with your Github username and &#39;my_website&#39; should be replaced with the name of the repo you created on Github.
+git remote add origin https://github.com/username/my_website
+
+git push -u origin master</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li><p>
+You can see my blogdown code repo <a href="https://github.com/CaitlinCasar/caitlin" target="_blank">here</a>. Now you’re ready to host your site online! I host my site for free on <a href="https://pages.github.com/" target="_blank">Github Pages</a>. This generates a domain in the format ‘your_github_user_name.github.io’. It’s affordable and easy to mask this domain with a custom domain of your choice. I bought my domain on Google domains for an annual fee of $12. This is totally optional - if this interests you, refer to my guide at the end of this post under ‘Using a custom domain’!
+</p>
+<ul>
+<li>
+<p>
+First you’ll need to create a new repo named <em>username.github.io</em>. Don’t initialize it with a README file. To create my site, I created a repo using my Github user name ‘caitlincasar’ on Github called caitlincasar.github.io. You can see this repo <a href="https://github.com/https://github.com/CaitlinCasar/CaitlinCasar.github.io" target="_blank">here</a>.
+</p>
+</li>
+<li>
+<p>
+Next, initialize a repo in your public folder in your blogdown directory and push the repo to your github.io repo:
+</p>
+</li>
+</ul></li>
+</ol>
+<pre class="bash"><code>#change directories into your public folder - this is where the site builds to when you run blogdown::hugo_build(local=T)
+cd ~/Desktop/blogdown_site/public
+
+#initialize a git repository in the directory 
+git init
+
+#add all the files to the queue
+git add .
+
+#commit the changes and add a short message
+git commit -a -m &quot;init commit&quot;
+
+#push your repo to the github server
+git remote add origin https://github.com/username/username.github.io
+
+git push -u origin master</code></pre>
+<p>
+To view your site, go to <a href="https://username.github.io/" class="uri">https://username.github.io/</a> in your web browser.
+</p>
+</div>
+<div id="create-a-new-post" class="section level2">
+<h2>Create a new post</h2>
+<p>
+We’re finally ready to create a new post! If you cloned the NUEarthGrads repo, open that folder and double click on the blogdown.Rproj file to open the project in RStudio.
+</p>
+<p>
+Run the following in your RStudio console:
+</p>
+<pre class="r"><code>#run the blogdown new_post function to generate a new markdown file in the post directory with today&#39;s date
+blogdown::new_post(title = &quot;my blog post title&quot;, subdir=&quot;post/my_blog_post_directory&quot;, date = &quot;June 9 2020&quot;)</code></pre>
+<p>
+The Hugo academic theme will add an image next to your post on the home page. To do this, add the image you want to be associated with your post inside the new directory you just created - in this example the directory is called “my_blog_post_directory”. Name the image “featured”, as in “featured.jpg”. Then, rename your new markdown file “index”, as in “index.Rmd”.
+</p>
+<p>
+Open up the markdown file you just created. You can do this from RStudio by navigating to the file in the Files window pane via the following path: content &gt;&gt; post &gt;&gt;my_blog_post_directory. Then double click on the markdown file.
+</p>
+<p><img class="post" src="images/blog_post_file.png"></p>
+<p>
+To preview your new post, click on the Viewer tab. You should see something like this:
+</p>
+<p><img class="post" src="images/new_post.png"></p>
+<p>
+You should edit the header to include your post name, date of the post, summary, etc. Here’s an exaple of how to modify the header:
+</p>
+<pre class="r"><code>---
+title: my blog post title
+author: ~
+date: June 9 2020
+slug: June 9 2020-my blog post title
+categories: [&quot;Diversity&quot;] #add categories for your post inside the brackets
+tags: [&quot;#BLM&quot;, &quot;equity&quot;] #add tags inside the brackets
+subtitle: &#39;This is my post!&#39;
+summary: &#39;Some info here about this post...This is what will be displayed on the home page.&#39;
+authors: [Caitlin] #add your name inside these brackets to indicate who authored the post
+lastmod: &#39;2020-06-09T15:36:45-05:00&#39;
+featured: no
+image:
+  caption: &#39;&#39;
+  focal_point: &#39;&#39;
+  preview_only: no
+projects: []
+---</code></pre>
+<p>
+Now you’re ready to add content to your post. Add Rmarkdown formatted text below the header in your markdown file, including images, hyperlinks, plots, code chunks, videos, and more! Here’s an example of some basic content:
+</p>
+<pre class="r"><code>---
+title: my blog post title
+author: ~
+date: June 9 2020
+slug: June 9 2020-my blog post title
+categories: [&quot;Diversity&quot;] #add categories for your post inside the brackets
+tags: [&quot;#BLM&quot;, &quot;equity&quot;] #add tags inside the brackets
+subtitle: &#39;This is my post!&#39;
+summary: &#39;Some info here about this post...This is what will be displayed on the home page.&#39;
+authors: [Caitlin] #add your name inside these brackets to indicate who authored the post
+lastmod: &#39;2020-06-09T15:36:45-05:00&#39;
+featured: no
+image:
+  caption: &#39;&#39;
+  focal_point: &#39;&#39;
+  preview_only: no
+projects: []
+---
+  
+Hello! This is my *first* blog post! I am **very** excited to share my post with you. I learned how to make this post [here](https://caitlincasar.com/post/blogdown/). 
+
+## Subheader
+
+This is a new section under a subheader. I can make an ordered list:
+1. This is item 1
+2. This is item 2
+3. And this is item 3!</code></pre>
+<p>
+<a href="https://rmarkdown.rstudio.com/authoring_basics.html" target="_blank">This</a> is great resource for more of the Rmarkdown basics.
+</p>
+<p>
+Once you’re done creating your post, just push your changes to Github and you’re done!
+</p>
+<pre class="r"><code>#change directories into your public folder - this is where the site builds to when you run blogdown::hugo_build(local=T)
+cd ~/Desktop/blogdown_site/public
+
+#pull in any changes that others may have pushed to Github
+git pull
+
+#add the new file
+git add .
+
+#commit the changes 
+git commit -a -m &quot;adding Caitlin&#39;s new blog post&quot;
+
+#push the changes to the Github server
+git push</code></pre>
+<p>
+Now you can see your awesome new post online! Hooray! 🐸
+</p>
+</div>
+<div id="using-a-custom-domain" class="section level2">
+<h2>Using a custom domain</h2>
+<p>Don’t like the github.io subdomain and TLD (top-level domain)? You can buy your own on <a href="https://domains.google/" target="_blank">Google domains</a>! I pay a $12 annual fee for caitlincasar.com. We’ll walk through the steps here:</p>
+<ol style="list-style-type: decimal">
+<li><p>
+Go to <a href="https://domains.google/" target="_blank">Google domains</a> and search for a domain name to see if it’s available.
+</p></li>
+</ol>
+<p><img class="post" src="images/google-domain-search.png"></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>
+Select the domain you want, then add it to your shopping cart.
+</p></li>
+</ol>
+<p><img class="post" src="images/google-domain-buy.png"></p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>
+Go to your shopping cart and click on the blue ‘check out’ button to review your purchase. Make sure your contact info is correct and enter your credit card, then click the blue ‘buy’ button.
+</p></li>
+</ol>
+<p><img class="post" src="images/google-domain-checkout.png"></p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>
+Next, go to your google domains account and select ‘my domains’ on the left side panel. Then select the ‘manage’ link next to your domain.
+</p></li>
+</ol>
+<p><img class="post" src="images/google-domains-mydomains.png"></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Click on ‘DNS’ on the left side panel. Then select ‘Use the Google Domains name servers’. Then click the blue ‘save’ button.</li>
+</ol>
+<p><img class="post" src="images/google-domains-nameservers.png"></p>
+<ol start="6" style="list-style-type: decimal">
+<li>Scroll to the bottom of the page and create an alias for your domain, then click the blue ‘Add’ button. You can use one of four IP addresses for Github:</li>
+</ol>
+<pre><code>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153</code></pre>
+<p><img class="post" src="images/google-domains-alias.png"></p>
+<ol start="7" style="list-style-type: decimal">
+<li>Finally, we’ll need to update the domain name on Github. Navigate to your username.github.io repo, then select ‘Settings’.</li>
+</ol>
+<p><img class="post" src="images/github-settings.png"></p>
+<ol start="8" style="list-style-type: decimal">
+<li><p>
+Scroll down to the Github Pages section and enter your custom domain name. It make take a few hours for your new domain name to register, after which you’ll be able to check the box under ‘Enforce HTTPS’. This enables https encryption on your site to prevent <a href="https://www.csoonline.com/article/3340117/what-is-a-man-in-the-middle-attack-how-mitm-attacks-work-and-how-to-prevent-them.html" target="_blank">man-in-the-middle attacks</a>.</li>
+</ol>
+<p><img class="post" src="images/github-customdomain.png"></p>
+<p>
+You should now be able to see your site when you navigate to your custom domain in your web browser. Congrats on creating and hosting your own site! Feel free to comment below with any comments/questions 😎
+</p>
+</div>

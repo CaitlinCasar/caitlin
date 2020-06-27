@@ -1,0 +1,13 @@
+body.dark .fa-sun {
+    display: block;
+}
+
+body.dark .fa-moon {
+    display: none;
+}
+
+.fa-sun {
+    display: none;
+}
+
+

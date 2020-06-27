@@ -1,0 +1,126 @@
+---
+title: "Thermodynamic Modeling with CHNOSZ"
+author: "Caitlin"
+date: 2020-06-20T21:14:16-05:00
+output: html_document
+categories: ["R"]
+tags: ["ggplot", "tidyverse", "CHNOSZ"]
+description: "Generate thermodynamic models for metabolic reactions under in situ conditions."
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+
+<p>
+Are you curious what sorts of metabolic processes might be occurring at your study site? Using in situ geochemical data, you can model the Gibbs free energy available from metabolic reactions and predict which metabolisms are energetically favorable! Gibbs free energy can be modeled using the following equation:
+</p>
+<p><span class="math display">\[\Delta G_r - RT ln \frac{K_r}{Q_r }\]</span></p>
+<p>
+where <span class="math inline">\(\Delta G_r\)</span> is the Gibbs energy of reaction <em>r</em> under in situ conditions, <span class="math inline">\(K_r\)</span> and <span class="math inline">\(Q_r\)</span> are the equillibrium constant and activity product of the <em>r</em>th reaction, R is the gas constant, and T is temperature in Kelvin.
+</p>
+<p>
+<span class="math inline">\(Q_r\)</span> can be calculated using the following equation:
+</p>
+<span class="math display">\[Q_r = \prod a_i ^{v_{i,r}}\]</span>
+<p>
+where <span class="math inline">\(a_i\)</span> is the activity of the <em>i</em>th species and <span class="math inline">\(v_{i,r}\)</span> is the stoichiometric coefficient of the <em>i</em>th species in the <em>r</em>th reaction.
+</p>
+<p>
+For this tutorial I’m using data and code from my <a href="https://caitlincasar.com/publication/casar2020/">publication</a> in <em>Geobiology</em>. We calculated activity coefficients for each species of interest using Spece8 in <a href="https://www.gwb.com/">Geochemist’s Workbench</a> using geochemical data collected from our field site. Then we used the <a href="https://www.chnosz.net/">CHNOSZ</a> package to calculate Gibbs free energy of various metabolic reactions. First, let’s check out what the activity data looks like.
+</p>
+<pre class="r"><code>#load tidyverse library
+pacman::p_load(tidyverse)
+
+activities &lt;- read_csv(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/DeMMO_SpecE8_aqueousGas.csv&quot;)</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/thermodynamic_modeling/index_files/figure-html//widgets/widget_unnamed-chunk-2.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>
+You can see we calculated activites for Ca<sup>2+</sup>, acetate, CH<sub>4</sub>, Fe<sup>2+</sup>, H<sup>+</sup>, HCO<sub>3</sub><sup>-</sup>, HS<sup>-</sup>, Mn<sup>2+</sup>, NH<sub>4</sub><sup>+</sup>, NO<sub>2</sub><sup>-</sup>, NO<sub>3</sub><sup>-</sup>, and SO<sub>4</sub><sup>2-</sup> at six different sites called DeMMO1-6.
+</p>
+<p>
+Once you have your activity coefficients, then you need to decide what reactions you want to model. I was interested in metabolic reactions with minerals, so I created a spreadsheet of balanced reactions with minerals and aqueous species available in situ. Let’s load this data and preview it here.
+</p>
+<pre class="r"><code>#import DeMMO mineral reactions
+reactions &lt;- read_csv(&quot;https://raw.githubusercontent.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms/master/orig_data/reactions_aq_gas.csv&quot;) %&gt;%
+  filter(!product.f == &quot;manganite&quot;) #removing reactions with manganite because we don&#39;t have equation of state data for this </code></pre>
+<div id="htmlwidget-2" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/post/thermodynamic_modeling/index_files/figure-html//widgets/widget_unnamed-chunk-4.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>
+The formatting of this data is important for compatability with CHNOSZ, so make sure you include the details I’m showing here when you balance your reactions. Notice that the reactant stoichiometric coefficients are negative because they’re on the left side of the reaction, while products are positive because they’re on the right side of the reaction. Now we’re ready to model Gibbs free energy from these reactions in CHNOSZ! First we’ll load the CHNOSZ library.
+</p>
+<pre class="r"><code>#load the CHNOSZ library
+pacman::p_load(CHNOSZ)</code></pre>
+<p>Let’s take a look at the available species for modeling reactions in the CHNOSZ database:</p>
+<pre class="r"><code>thermo_db &lt;- thermo()$obigt %&gt;% as_tibble()</code></pre>
+<div id="htmlwidget-3" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/post/thermodynamic_modeling/index_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>A few minerals that I was interested in were missing in the database, but that’s ok! If you have the Gibbs free energy available at stadard conditions and the equation of state data for your reactant, you can add it to the CHNOSZ database. Let’s add pyrolusite and ferrihydrite with the mod.obigt function!</p>
+<pre class="r"><code>#add pyrolusite to database
+pyrolusite &lt;- mod.obigt(&quot;pyrolusite&quot;, G=-111100, H=-124283, S=12.61, V=17.3, formula=&quot;MnO2&quot;, state=&quot;cr&quot;, a1.a=12.55, a2.b=9.761, a3.c=-2.105)
+
+#add ferrihydrite to database
+ferrihydrite &lt;- mod.obigt(&quot;ferrihydrite&quot;, G=-111200, H=-127800, S=16.7, V=20.88, formula=&quot;FeOOH&quot;, state=&quot;cr&quot;, a1.a=8.70, a2.b=36.71, a3.c=-1.0146)</code></pre>
+<p>You can set your temperature and energy units like this:</p>
+<pre class="r"><code>#set temperature units to Kelvin
+T.units(&quot;K&quot;)
+
+#set energy units to joules
+E.units(&quot;J&quot;)</code></pre>
+<p>Let’s calculate logK:</p>
+<pre class="r"><code>logK &lt;- reactions %&gt;%
+  pivot_longer(reactant.a:state.i,
+               names_to = c(&quot;.value&quot;, &quot;set&quot;),
+               names_pattern = &quot;(.+).(.+)&quot;) %&gt;% #pivot from wide to long dataframe
+  unite(&quot;react_prod&quot;, reactant:product, na.rm = TRUE, remove = F) %&gt;% #unite the reactants and products into one column 
+  filter(!react_prod == &quot;&quot;) %&gt;% #remove any rows with missing react_prod values
+  group_by(rxn.number) %&gt;% #group by reaction number for calculations
+  summarise(DeMMO1 = subcrt(react_prod, coeff, state, T=283.45)$out$logK,#calculate logK using in situ DeMMO1 temperature for all other reactions 
+         DeMMO2 = subcrt(react_prod, coeff, state, T=285.55)$out$logK,
+         DeMMO3 = subcrt(react_prod, coeff, state, T=289.35)$out$logK,
+         DeMMO4 = subcrt(react_prod, coeff, state, T=295.65)$out$logK,
+         DeMMO5= subcrt(react_prod, coeff, state, T=304.85)$out$logK,
+         DeMMO6 = subcrt(react_prod, coeff, state, T=294.65)$out$logK) %&gt;%
+  pivot_longer(cols = DeMMO1:DeMMO6, names_to = &quot;Site&quot;, values_to = &quot;LogK&quot;) %&gt;% #pivot from wide to long for merging later 
+  distinct() #remove the duplicate rows </code></pre>
+<p>Now we need to calculate logQ:</p>
+<pre class="r"><code>activities &lt;- activities %&gt;%
+  pivot_longer(`Ca+2`:CO, names_to = &quot;react_prod&quot;, values_to = &quot;activity&quot;) #pivot from wide to long for joining
+
+logQ &lt;- reactions %&gt;%
+  pivot_longer(reactant.a:state.i,
+               names_to = c(&quot;.value&quot;, &quot;set&quot;),
+               names_pattern = &quot;(.+).(.+)&quot;) %&gt;% #pivot from wide to long 
+  unite(&quot;react_prod&quot;, reactant:product, na.rm = TRUE, remove = F) %&gt;% #unite the reactant and product columns into one column called react_prod 
+  left_join(activities) %&gt;% #join with the activities data 
+  filter(!is.na(activity)) %&gt;% #remove any activities with NA values 
+  mutate(logQ = if_else(!is.na(reactant), -abs(coeff)*activity, abs(coeff)*activity)) %&gt;% #multiply each species by its stoichiometric coefficient 
+  group_by(rxn.number, Site) %&gt;% #group on the reaction number and site 
+  summarise(logQ = sum(logQ)) #calculate logQ </code></pre>
+<p>Finally, it’s time to calculate Gibbs free energy yield from each reaction!</p>
+<pre class="r"><code>deltaG &lt;- logK %&gt;%
+  left_join(logQ) %&gt;% #join the logK and logQ tables 
+  left_join(reactions %&gt;% select(rxn.number, e.transfer, reactant.a)) %&gt;% #add the reaction number, number of electrons transferred, and minerals from each reaction 
+  rename(mineral = &quot;reactant.a&quot;) %&gt;% #rename reactant.a to mineral for clarity 
+  mutate(deltaG = (-2.303*8.314*283.45*(LogK-logQ))/(e.transfer*1000)) #calculate deltaG for each reaction at each site </code></pre>
+<p>Lets’s take a look at the deltaG table:
+<div id="htmlwidget-4" style="width:100%;height:400px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"url":"/post/thermodynamic_modeling/index_files/figure-html//widgets/widget_unnamed-chunk-13.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script></p>
+<p>Now, let’s plot the data and see which metabolic reactions with minerals are energetically favorable under in situ conditions at DeMMO:</p>
+<pre class="r"><code>deltaG %&gt;%
+  ggplot(aes(deltaG, reorder(rxn.number, -deltaG), shape=Site, group=rxn.number)) +
+  theme_gray() +
+  geom_line(aes(color=mineral), size=2.5, alpha=0.6) + #color each line spanning the deltaG values for the six sites by the mineral in the reaction
+  geom_point() + 
+  scale_shape_manual(values = c(0,1,2,15,16,17)) + #manually set the shapes for each point to denote the six different sites 
+  scale_x_reverse() + #reverse the x-axis to show exergonic values on the right, this is standard for this kind of data
+  labs(x=expression(Delta~G[r]~&#39;kJ/mol&#39;~e^{textstyle(&quot;-&quot;)})) + #generate the axis labels
+  ylab(&quot;Reaction #&quot;) +
+  geom_vline(xintercept = 0, linetype=&quot;dotted&quot;, color = &quot;black&quot;) + #add a vertical line at zero for reference 
+  theme(legend.position = c(.1, .6), legend.text=element_text(size=8), legend.title = element_text(size=8, face=&quot;bold&quot;)) + #position the legend on the left 
+  theme(legend.key.size =  unit(0.2, &quot;in&quot;)) #resize the legend to make it fit </code></pre>
+<p><img src="/post/thermodynamic_modeling/index_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Everything that plots to the right of the dotted line is exergonic, while everything to the left of the dotted line is endergonic. The most exergonic and therefore the most energetically favorable reactions occur with the mineral pyrolusite, followed by pyrite. If you’re curious which reactant was coupled to these minerals for each reaction, refer back to the reactions table above! 👩‍🔬</p>
+<a class="github-button" href="https://github.com/CaitlinCasar/Casar2020_DeMMO_MineralHostedBiofilms" data-icon="octicon-repo-forked" aria-label="Fork ntkme/github-buttons on GitHub">Fork Me</a>
+<script async defer src="https://buttons.github.io/buttons.js"></script>

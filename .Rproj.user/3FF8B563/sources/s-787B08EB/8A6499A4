@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1593277446119.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "8A6499A4",
+    "lastKnownWriteTime" : 1593279852,
+    "last_content_update" : 1593279852064,
+    "path" : "~/Desktop/website_files/blogdown/content/post/blogdown/index.rmd",
+    "project_path" : "content/post/blogdown/index.rmd",
+    "properties" : {
+        "cursorPosition" : "280,0",
+        "scrollLine" : "277",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

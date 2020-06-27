@@ -1,0 +1,8 @@
+"0","#NMDS plot with controls "
+"0","NMDS_plot <- NMDS_coords %>%"
+"0","  ggplot(aes(MDS1, MDS2)) +"
+"0","  geom_point(size=2, alpha=0.8, aes(shape=site.type, color=site.type, label = sample_id)) +"
+"0","  scale_shape_manual(values=shape_dict) +"
+"0","  theme(legend.key.size = unit(.5, ""cm""))"
+"0","#visualize interactive plot"
+"0","ggplotly(NMDS_plot)"

@@ -1,0 +1,154 @@
+// Override this file to add your own SCSS styling.
+
+
+// change light/dark button to moon/sun
+body.dark .fa-sun {
+    display: block;
+}
+
+body.dark .fa-moon {
+    display: none;
+}
+
+.fa-sun {
+    display: none;
+}
+
+.navbar .navbar-nav .nav-link .fa-moon,
+.navbar .navbar-nav .nav-link .fa-sun {
+    color: rgba(255,202,51, 1);
+}
+
+
+// style main photo on home page with drop shadow, animation
+.avatar-circle {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    filter: grayscale(100%);
+    transition: all 0.5s ease;
+}
+
+.avatar-circle:hover {
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    filter: grayscale(0%);
+  }
+
+
+// style the nav bar elements
+.navbar-brand img {
+    max-height: 26px;
+    float: left;
+    padding-right: 10px;
+}
+
+.col-lg-8 {
+    flex: 0 0 66.66666667%;
+    max-width: 66.66666667%;
+    padding: 81px 10px;
+}
+
+
+.col-lg-8 h1{
+    font-weight: 700;
+}
+
+.big-icon {
+    font-size: 1.5rem;
+}
+
+// add grey rectangles on hover  in nav bar
+#navbar-main .main-menu-item ul li .nav-link {
+    border-radius: 5px;
+    padding: .75rem;
+    margin-right: 6px;
+}
+
+#navbar-main .main-menu-item ul li .nav-link span {
+    font-size: 15px;
+}
+
+#navbar-main .main-menu-item ul li .nav-link:hover,
+#navbar-main .main-menu-item ul li .nav-link:active,
+#navbar-main .main-menu-item ul li .nav-link:focus {
+    background: #f9f9f9;
+}
+
+// h3.article-title a:hover {
+//     font-size: 1.05rem;
+//     font-weight: 400;
+//     padding: .75rem;
+//     margin: 0 .25rem;
+//     color: rgba(0,0,0,.6);
+//     line-height: 1.2;
+//     text-align: center;
+//     border-radius: 6px;
+// }
+
+// style headers
+.section-heading h1 {
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+.article-container h1 {
+    font-weight: 700;
+    margin-top: 84px;
+}
+
+
+// code chunk styling 
+
+.hljs {
+    word-break: normal;
+    word-wrap: normal;
+    background-color: #333;
+    color: #62cfcf;
+    display: block;
+    border-radius: 5px;
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.hljs-comment {
+    color: #92d192;
+}
+
+.hljs-built_in {
+    color: #efef8f;
+}
+
+.hljs-keyword {
+    color: #966fd6;
+}
+
+.hljs-string {
+    color: #fca369;
+}
+
+// blog post font styling  
+.article-style p{
+font-size: 0.75rem;
+text-align: justify;
+}
+
+
+// style horizontal lines
+.horizontal_line{
+    border-bottom: 1px  solid #dbdbdb;
+    width: 100%;
+    margin-bottom: 10px;
+  } 
+
+// style bullet points
+ul.gray-bullets li { color: gray; } /* bullet */
+ul.gray-bullets li span { color: black;
+font-size: 16px; } /* text */
+
+img.post {
+  box-shadow: 0px 3px 10px rgba(0,0,0,.8);
+  margin-top: 12px;
+  margin-bottom: 24px;
+  border-radius: 5px;
+}
