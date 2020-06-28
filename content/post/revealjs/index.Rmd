@@ -13,7 +13,7 @@ description: "Learn to create beautiful slides in revealJS."
 
 <iframe src="SpringCommitteeMeeting2020/revealjs.html" width="100%" height="500" style="border: none;"></iframe> 
 
-<p>This presentation was a lot of fun to make! Here I'll show you the basics, then I'll give examples of more advanced stuff you can do.</p>
+<p>This presentation was a lot of fun to make! Here I'll show you the basics, then I'll give examples of more advanced stuff you can do.</p> 
 
 1. <p>First, we need to get set up to use revealjs in R. Open RStudio and run the following in your console:</p>
 
