@@ -1,6 +1,10 @@
 {
-    "path" : "~/Desktop/website_files/blogdown/content/post/blogdown",
+    "path" : "~/Desktop/website_files/blogdown/content/post/making_figs_2",
     "sortOrder" : [
+        {
+            "ascending" : false,
+            "columnIndex" : 4
+        },
         {
             "ascending" : true,
             "columnIndex" : 2

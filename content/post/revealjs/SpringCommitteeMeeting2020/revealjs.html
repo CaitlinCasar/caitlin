@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>revealjs.utf8</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="revealjs_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="revealjs_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="styles.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="check-out-my-revealjs-presentation" class="title-slide slide level1" data-background="#262626"><h1>Check out my revealJS presentation!</h1><p style="color: #fff;">
+Use your arrow keys to navigate.
+</p>
+<p style="color: #fff;">
+Press ‘f’ to view slides in full-screen mode.
+</p>
+<p style="color: #fff;">
+Press ‘s’ to open a new window with presenter view - this includes my notes for each slide and a timer.
+</p>
+<p style="color: #fff;">
+Press escape to view the slide map. Then double click the slide you want to view.
+</p></section>
+<section id="committee-meeting" class="title-slide slide level1 color-change-2x"><h1>Committee Meeting</h1><p class="tracking-in-expand">
+Spring 2020
+</p></section>
+<section><section id="timeline-of-major-events" class="title-slide slide level1" data-background="#262626"><h1>Timeline of major events</h1></section><section id="phd-timeline" class="slide level2 offset-top color-change-2x">
+<h2>PhD Timeline</h2>
+<p><link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  /></p>
+<span >
+<hr>
+<span> <span class="timeline-divider one"></span> <span class="timeline-divider two"></span> <span class="timeline-divider three"></span> <span class="timeline-divider four"></span>
+<p class="timeline-date one">
+Fall<br>2017
+</p>
+<p class="timeline-date two">
+Fall<br>2018
+</p>
+<p class="timeline-date three">
+Fall<br>2019
+</p>
+<p class="timeline-date four">
+Fall<br>2020
+</p>
+<span class="dot phd-one animate__animated animate__pulse"></span> <span class="dot phd-two animate__animated animate__pulse"></span> <span class="dot phd-three animate__animated animate__pulse"></span> <span class="dot phd-four animate__animated animate__pulse"></span>
+<p class="timeline-label phd-one">
+Start
+</p>
+<p class="timeline-label phd-two">
+Quals
+</p>
+<p class="timeline-label phd-three">
+Today
+</p>
+<p class="timeline-label phd-four">
+Defense
+</p>
+<aside class="notes">
+I started in 2016, today I’m almost at the end of my fourth year, and I’m hoping to defend sometime around Summer 2021.
+</aside>
+</section><section id="funding" class="slide level2 offset-top color-change-2x">
+<h2>Funding</h2>
+<p><link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  /></p>
+<span>
+<hr>
+<span> <span class="timeline-divider one"></span> <span class="timeline-divider two"></span> <span class="timeline-divider three"></span> <span class="timeline-divider four"></span>
+<p class="timeline-date one">
+Fall<br>2017
+</p>
+<p class="timeline-date two">
+Fall<br>2018
+</p>
+<p class="timeline-date three">
+Fall<br>2019
+</p>
+<p class="timeline-date four">
+Fall<br>2020
+</p>
+<span class="dot funding-one animate__animated animate__pulse"></span> <span class="dot funding-two animate__animated animate__pulse"></span>
+<p class="timeline-label funding-one">
+NESSF begins
+</p>
+<p class="timeline-label funding-two">
+NESSF ends
+</p>
+<aside class="notes">
+I started receiving funding for the NASA Earth and Space Science Fellowship in 2018 which includes my stipend and $10k annual allowance. I applied for my final renewal this year. The funding will end by August 2021.
+</aside>
+</section><section id="conferences" class="slide level2 offset-top color-change-2x">
+<h2>Conferences</h2>
+<p><link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  /></p>
+<span>
+<hr>
+<span> <span class="timeline-divider one"></span> <span class="timeline-divider two"></span> <span class="timeline-divider three"></span> <span class="timeline-divider four"></span>
+<p class="timeline-date one">
+Fall<br>2017
+</p>
+<p class="timeline-date two">
+Fall<br>2018
+</p>
+<p class="timeline-date three">
+Fall<br>2019
+</p>
+<p class="timeline-date four">
+Fall<br>2020
+</p>
+<p><span class="dot conferences-one animate__animated animate__pulse"></span> <span class="dot conferences-two animate__animated animate__pulse"></span> <span class="dot conferences-three animate__animated animate__pulse"></span> <span class="dot conferences-four animate__animated animate__pulse"></span> <span class="dot conferences-five animate__animated animate__pulse"></span> <span class="dot conferences-six animate__animated animate__pulse"></span> <span class="dot conferences-seven animate__animated animate__pulse"></span> <span class="dot conferences-eight animate__animated animate__pulse"></span> <span class="dot conferences-nine animate__animated animate__pulse"></span> <span class="dot conferences-ten animate__animated animate__pulse"></span></p>
+<p class="timeline-label conferences-one">
+AbSciCon
+</p>
+<p class="timeline-label conferences-two">
+CosSURF
+</p>
+<p class="timeline-label conferences-three">
+AGU
+</p>
+<p class="timeline-label conferences-four">
+MWGB
+</p>
+<p class="timeline-label conferences-five">
+ISMET
+</p>
+<p class="timeline-label conferences-six">
+AGU
+</p>
+<p class="timeline-label conferences-seven">
+AbSciCon
+</p>
+<p class="timeline-label conferences-eight">
+MWGB
+</p>
+<p class="timeline-label conferences-nine">
+Gordon
+</p>
+<p class="timeline-label conferences-ten">
+MWGB
+</p>
+<aside class="notes">
+I’ve used my allowance to pay for some of my research as well as attend conferences. If things ease up with the pandemic I plan to attend Midwest Geobio symposium this Fall.
+</aside>
+</section><section id="professional-development" class="slide level2 offset-top color-change-2x">
+<h2>Professional Development</h2>
+<p><link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  /></p>
+<span>
+<hr>
+<span> <span class="timeline-divider one"></span> <span class="timeline-divider two"></span> <span class="timeline-divider three"></span> <span class="timeline-divider four"></span>
+<p class="timeline-date one">
+Fall<br>2017
+</p>
+<p class="timeline-date two">
+Fall<br>2018
+</p>
+<p class="timeline-date three">
+Fall<br>2019
+</p>
+<p class="timeline-date four">
+Fall<br>2020
+</p>
+<span class="dot profdev-one animate__animated animate__pulse"></span> <span class="dot profdev-two animate__animated animate__pulse"></span> <span class="dot profdev-three animate__animated animate__pulse"></span>
+<p class="timeline-label profdev-one">
+International<br>Geobiology<br>Field Course
+</p>
+<p class="timeline-label profdev-two">
+NU ACiDS
+</p>
+<p class="timeline-label profdev-three">
+84.51<br>Internship
+</p>
+<aside class="notes">
+Aside from conferences I’ve put time into other forms of professional development and networking, including a field course in Geobiology, I was president of the Academics for Careers in Data Science club, and I’ll be doing an internship at a data science firm in Chicago called 84.51 this summer.
+</aside>
+</section><section id="field-work" class="slide level2 offset-top color-change-2x">
+<h2>Field Work</h2>
+<p><link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  /></p>
+<span>
+<hr>
+<span> <span class="timeline-divider one"></span> <span class="timeline-divider two"></span> <span class="timeline-divider three"></span> <span class="timeline-divider four"></span>
+<p class="timeline-date one">
+Fall<br>2017
+</p>
+<p class="timeline-date two">
+Fall<br>2018
+</p>
+<p class="timeline-date three">
+Fall<br>2019
+</p>
+<p class="timeline-date four">
+Fall<br>2020
+</p>
+<p><span class="dot fieldwork-one animate__animated animate__pulse"></span> <span class="dot fieldwork-two animate__animated animate__pulse"></span> <span class="dot fieldwork-three animate__animated animate__pulse"></span> <span class="dot fieldwork-four animate__animated animate__pulse"></span> <span class="dot fieldwork-five animate__animated animate__pulse"></span> <span class="dot fieldwork-six animate__animated animate__pulse"></span> <span class="dot fieldwork-seven animate__animated animate__pulse"></span> <span class="dot fieldwork-eight animate__animated animate__pulse"></span></p>
+<aside class="notes">
+I’ve visited our field site in South Dakota two times in the past year with my last visit this past December.
+</aside>
+</section><section id="publications" class="slide level2 offset-top color-change-2x">
+<h2>Publications</h2>
+<p><link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  /></p>
+<span>
+<hr>
+<span> <span class="timeline-divider one"></span> <span class="timeline-divider two"></span> <span class="timeline-divider three"></span> <span class="timeline-divider four"></span>
+<p class="timeline-date one">
+Fall<br>2017
+</p>
+<p class="timeline-date two">
+Fall<br>2018
+</p>
+<p class="timeline-date three">
+Fall<br>2019
+</p>
+<p class="timeline-date four">
+Fall<br>2020
+</p>
+<span class="dot publications-one animate__animated animate__pulse"></span> <span class="dot publications-two animate__animated animate__pulse"></span> <span class="dot publications-three animate__animated animate__pulse"></span>
+<p class="timeline-label publications-one">
+Casar et al. 2020<br><i>Geobiology</i>
+</p>
+<p class="timeline-label publications-two">
+Pub. 2
+</p>
+<p class="timeline-label publications-three">
+Pub. 3
+</p>
+<aside class="notes">
+And I recently published a manuscript in Geobiology and will aim for at least two more publications before I graduate.
+</aside>
+</section></section>
+<section><section id="section" class="title-slide slide level1" data-background="mars_v_cont-01-01.png"><h1></h1><aside class="notes">
+I mentioned this work is funded by NASA and the overarching objective is to try to learn something about habitability of rocky subsurface environments on other planets like Mars. So we’re studying the continental deep subsurface as an analog for these settings.
+</aside></section><section id="section-1" class="slide level2" data-background="mars_v_cont-01.png">
+<h2></h2>
+<aside class="notes">
+On Earth we know that fluid interactions with rock produce geochemical conditions that support microbial life, and these same sorts of processes could sustain life in the subsurface of Mars as well.
+</aside>
+</section><section id="section-2" class="slide level2" data-background="cont_biomass-01.png">
+<h2></h2>
+<aside class="notes">
+<p>There’s been a global effort to characterize the habitability off the terrestrial subsurface which we now know hosts highly diverse and abundant life, and it was recently estimated that 30% of all prokaryotic life on Earth resides in the continental subsurface alone </asid></p>
+</section><section id="section-3" class="slide level2" data-background="attached_v_suspended-01.png">
+<h2></h2>
+<aside class="notes">
+<p>Of this biomass, its estimated 20% is microbes suspended in fluids and as much as 80% is microbes attached to surfaces in biofilms. So there is a non-trival amount of microbial life in these systems on Earth and potentially on other planets, the majority of which is probably biofilms. </asid></p>
+</section><section id="section-4" class="slide level2" data-background="biofilms-01.png">
+<h2></h2>
+<aside class="notes">
+For this reason my work specifically focuses on biofilm communities - these are the microbes that attach themselves to rock surfaces. I am trying to shed light on how these biofilm communities are getting their energy and what the controls on biofilm diversity and biomass are here so we can better understand the habitability of rocky subsurface settings on other planets.
+</aside>
+</section></section>
+<section><section id="mineral-hosted-biofilms-in-the-continental-deep-subsurface" class="title-slide slide level1" data-background="#262626"><h1>Mineral-hosted biofilms in the continental deep subsurface</h1><ol>
+<li class="fragment highlight-current-blue">
+Who are the mineral-hosted microbes?
+</li>
+<li class="fragment highlight-current-blue">
+How do they get their energy? - are they eating/breathing the minerals?
+</li>
+<li class="fragment highlight-current-blue">
+What role do minerals play in controlling biofilm diversity and biomass?
+</li>
+</ol>
+<aside class="notes">
+This project focuses on mineral-hosted biofilms in the continental deep subsurface- specifically, (list off questions…) who are these microbes, how are they getting their energy, and what role do minerals play in controlling biofilm diversity and biomass?
+</aside></section><section id="section-5" class="slide level2 site-offset" data-background="field_work.jpeg">
+<h2></h2>
+<p><link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  /></p>
+<object class="site animate__animated animate__pulse" type="image/svg+xml" data="site-location.svg" width="100%" height="1500%">
+Your browser does not support SVG
+</object>
+<aside class="notes">
+<p>Part of the reason there’s still unanswered questions about microbial life in the continental subsurface is because it’s challenging to get thousands of feet down into the crust. We take advantage of a gold mine in South Dakota where we’re able to access fracture fluids to a depth of 1.5km.</p>
+<p>This is a borehole packer in the background, its basically a plastic pipe that allows us to sample fracture fluids. And you can see all this iron oxide that has precipitated out from all the dissolved ferrous in the fluids as it drips out and encounters air. The iron is coming from all the iron-rich minerals in the rock reacting with the fracture fluid, and its one of many energy sources dissolved in the fluids that can support microbial life.</p>
+</aside>
+</section><section id="section-6" class="slide level2" data-background="mineral_energy-01.png">
+<h2></h2>
+<aside class="notes">
+<p>Some of the microbes in these fractures float or swim around in the fluids, and there’s dissolved gases and ions in the fluids that they can use as energy sources, but the minerals in the rock can provide energy too</p>
+<p>other microbes in the fracture can attach to the fracture surface, forming this thin, sticky film called a biofilm. Because they’re in direct contact with the rock, it might be easier for these microbes in the biofilm to access the minerals in the rock as an energy source.</p>
+<p>and if they’re eating/breathing these minerals then we should probably see some differences in the number of microbes and the types of microbes colonizing the fracture surfaces</p>
+</aside>
+</section><section id="section-7" class="slide level2" data-background="mineral_project_question-01.png">
+<h2></h2>
+<aside class="notes">
+<p>So the central question we wanted to address with this study is what role do minerals play in driving differences in biomass and biodiversity between the suspended and attached communities in the continental subsurface?</p>
+</aside>
+</section><section id="section-8" class="slide level2 scale-in-rock" data-background="#262626">
+<h2></h2>
+<div class="wobble-hor-bottom">
+<object class="rock poorman scale-in-center" type="image/svg+xml" data="poorman.svg" width="50%" height="50%">
+Your browser does not support SVG
+</object>
+<object class="rock homestake scale-in-center" type="image/svg+xml" data="homestake.svg" width="50%" height="50%">
+Your browser does not support SVG
+</object>
+</div>
+<p class="rock-label poorman">
+Poorman
+</p>
+<p class="rock-label homestake">
+Homestake
+</p>
+<div class="wobble-hor-bottom">
+<object class="rock ellison scale-in-center" type="image/svg+xml" data="ellison.svg" width="50%" height="50%">
+Your browser does not support SVG
+</object>
+<object class="rock yates scale-in-center" type="image/svg+xml" data="yates.svg" width="50%" height="50%">
+Your browser does not support SVG
+</object>
+</div>
+<p class="rock-label ellison">
+Ellison
+</p>
+<p class="rock-label yates">
+Yates
+</p>
+<aside class="notes">
+These are the four major rock types at DeMMO which contain iron and sulfur bearing minerals like pyrite that are putative energy sources for members of the biofilms.
+</aside>
+</section><section id="geochemistry" class="slide level2">
+<h2>Geochemistry</h2>
+<div>
+<iframe src="geochem.html" width="100%" height="580" marginheight="0" marginwidth="0" allowFullScreen>
+</iframe>
+</div>
+<aside class="notes">
+We have geochemical data from the past few years of studying this system - here I’m showing the redox sensitive species we measured in the fluids and you can see there’s a lot of available dissolved electron donors and acceptors for the microbes to use for energy.
+</aside>
+</section><section id="thermodynamic-models" class="slide level2">
+<h2>Thermodynamic Models</h2>
+<div>
+<iframe src="deltaG.html" width="100%" height="580" marginheight="0" marginwidth="0" allowFullScreen>
+</iframe>
+</div>
+<aside class="notes">
+<p>We can use what we know about the fracture fluid chemistry and host rock lithology to first do some thermo modelling to predict which minerals might be good energy sources at DeMMO.</p>
+<p>This figure shows Gibb’s free energy on the x-axis with exergonic reactions to the right of the dotted line, and the various colors denote the different minerals we modeled with a the available dissolved electron donors and acceptors.</p>
+<p>And you can see that all of these minerals can be energy yielding in the right reaction, but some seem to generally be better energy sources than others</p>
+<p>for example e see that the majority of these are reactions with the a mn-oxide mineral called pyrolusite, so from this we can predict that pyrolusite could be a preferable electron acceptor for members of the biofilm communities, and we can test this out using field experiments to see if anything interesting happens when we introduce these minerals to the communities</p>
+</aside>
+</section><section id="section-9" class="slide level2" data-background="experiment_design-01.png">
+<h2></h2>
+<aside class="notes">
+<p>To do this we set up field colonization reactors filled with either inert sand or single crystal minerals representative of the native rock. These reactors were connected to the outflow of a borehole packer and left for several moneths to allow time for biofilms to colonize the mineral surfaces. We then collected the reactors and estimated biomass using SEM on mineral coupons in the reactors and identified the members of the biofilms with DNA sequencing.</p>
+</section><section id="demmo" class="slide level2 offset-top" data-background="mine-01.png">
+<h2>DeMMO</h2>
+<p><link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+  /></p>
+<p><span class="dot mine-one animate__animated animate__pulse">1</span> <span class="dot mine-two animate__animated animate__pulse">3</span> <span class="dot mine-three animate__animated animate__pulse">6</span></p>
+<p><span class="small-dot mine-one animate__animated animate__pulse"></span> <span class="small-dot mine-two animate__animated animate__pulse"></span> <span class="small-dot mine-three animate__animated animate__pulse"></span></p>
+<aside class="notes">
+<p>This is a cross-sectional view of the gold mine where we installed the reactors across a range of depths and geochemical conditions at three DeMMO sites: DeMMO1, 3, 6.</p>
+</aside>
+</section><section id="diversity" class="slide level2">
+<h2>Diversity</h2>
+<div>
+<iframe src="observed_otus.html" width="100%" height="580" marginheight="0" marginwidth="0" allowFullScreen>
+</iframe>
+</div>
+<aside class="notes">
+we found that the fluid communities were more diverse than the biofilm communities, suggesting mineral and glass surfaces are selecting for a subset of the fluid communities
+</aside>
+</section><section id="communities" class="slide level2">
+<h2>Communities</h2>
+<div>
+<iframe src="bar_plot.html" width="100%" height="580" marginheight="0" marginwidth="0" allowFullScreen>
+</iframe>
+</div>
+&lt;
+<aside class="notes">
+Different taxa dominated the biofilms vs. the fluid communities, with some taxa representing over 50% of the biofilm communities, indicating certain minerals promote colonization of these taxa over others
+</aside>
+</section><section id="section-10" class="slide level2" data-background="cell_morphologies.png">
+<h2></h2>
+<aside class="notes">
+We also found that specific minerals enhance biomass. Here we’re looking at SEM images of pyrolusite coupons next to inert controls and you can see the densities and morphologies are pretty different between the two. So I collected 1300 of these images across all the experiments and estimated biomass for each.
+</aside>
+</section><section id="biomass" class="slide level2">
+<h2>Biomass</h2>
+<div>
+<iframe src="biomass.html" width="100%" height="580" marginheight="0" marginwidth="0" allowFullScreen>
+</iframe>
+</div>
+<aside class="notes">
+We found much higher cell densities in the biofilm communities compared to the fluid communities - as much as 3-4 orders of mag
+</aside>
+</section><section id="section-11" class="slide level2" data-background="ch1_conclusion.png">
+<h2></h2>
+<aside class="notes">
+The takeaway messages from this is that host rock mineralogy is probably an important control on biofilm diversity and biomass, where minerals can host taxonomically distinct communities of significantly greater biomass than the fluids in the continental subsurface, which has implications for the search for life on other planets like Mars.
+</aside>
+</section><section id="section-12" class="slide level2" data-background="pub.png">
+<h2></h2>
+<aside class="notes">
+We just published this study in Geobology this past February
+</aside>
+</section></section>
+    </div>
+  </div>
+
+  <script src="revealjs_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="revealjs_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'revealjs_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+        ]
+      });
+    </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

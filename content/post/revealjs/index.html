@@ -1,0 +1,334 @@
+---
+title: "Making beautiful interactive slides with revealJS"
+author: "Caitlin"
+date: 2020-06-28T21:14:16-05:00
+output: html_document
+thumbnail: ""
+categories: ["R", "css", "html", "javascript"]
+tags: ["revealjs"]
+description: "Learn to create beautiful slides in revealJS."
+---
+
+
+
+<p>
+Today I’ll show you how to spice up your presentations with <a href="https://github.com/rstudio/revealjs" target="_blank">revealJS</a> in R. This is an HTML presentation framework that allows you to share your slides on the web, add custom animations, embed websites into your slides, and more! Here’s an example of a presentation I made for my 2020 Spring Committee Meeting:
+</p>
+<iframe src="SpringCommitteeMeeting2020/revealjs.html" width="100%" height="500" style="border: none;">
+</iframe>
+<p>
+This presentation was a lot of fun to make! Here I’ll show you the basics, then I’ll give examples of more advanced stuff you can do.
+</p>
+<ol style="list-style-type: decimal">
+<li><p>
+First, we need to get set up to use revealjs in R. Open RStudio and run the following in your console:
+</p></li>
+</ol>
+<pre class="r"><code>install.packages(&quot;revealjs&quot;, type = &quot;source&quot;)</code></pre>
+<p><img class="post" src="images/install.png"></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>
+Next, open up a new R markdown document.
+</p></li>
+</ol>
+<p><img class="post" src="images/new-file.png"></p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>
+Select the HTML output in the pop-up window and give your document a title.
+</p></li>
+</ol>
+<p><img class="post" src="images/new-presentation.png"></p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>
+Then modify your header content. To make my slides in the example above, I used this header:
+</p></li>
+</ol>
+<pre class="r"><code>---
+output: 
+  revealjs::revealjs_presentation:
+    transition: default
+    self_contained: false
+    reveal_plugins: notes
+    css: styles.css
+    center: true
+    mathjax: NULL
+---</code></pre>
+<p><img class="post" src="images/yaml.png"></p>
+<p>
+Here’s a breakdown of those parameters:
+</p>
+<ul>
+<li><p>
+<strong>Output</strong> indicates that you want a revealjs output.
+</p></li>
+<li><p>
+<strong>Transition</strong> sets your slide transitions. You can choose from “default”, “fade”, “slide”, “convex”, “concave”, “zoom” or “none”.
+</p></li>
+<li><p>
+<strong>Self contained</strong> determines whether dependencies are external or internal. To use plugins this has to be set to false.
+</p></li>
+<li><p>
+<strong>Reveal plugins</strong> enable plugins including notes, zoom, search, and chalkboard. The notes plugin functions much like presenter mode in Powerpoint.
+</p></li>
+<li><p>
+<strong>CSS</strong> is your custom styles CSS (cascading style sheet) file. This allows you to add styling to HTML elements, such as font color, add animations, and more.
+</p></li>
+<li><p>
+<strong>Center</strong> sets all of your slides to center text alignment. You can set the alignment on individual slides as well.
+</p></li>
+<li><p>
+<strong>Mathjax</strong> enables rendering of LaTeX and MathML equations including special characters like greek symbols. Options include default, local, and NULL.
+</p></li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>Now, lets add some slides!:</li>
+</ol>
+<pre class="r"><code>---
+output: 
+  revealjs::revealjs_presentation:
+    transition: default
+    self_contained: false
+    reveal_plugins: notes
+    css: styles.css
+    center: true
+    mathjax: NULL
+---
+
+# This is my title slide
+
+# This is Section 1
+
+## This is the first slide in Section 1
+
+# This is Section 2
+
+## This is the first slide in Section 2</code></pre>
+<p>
+Once your slides are ready, click the Knit button to build the html output and preview your slides!
+</p>
+<p><img class="post" src="images/knit.png"></p>
+<p>
+The code above produces the following slides:
+</p>
+<iframe src="example_slides/example1.html" width="100%" height="500" style="border: none;">
+</iframe>
+<ol start="6" style="list-style-type: decimal">
+<li><p>
+Let’s add some style to the slides. We can add a background color, background image, or embed an html file as the background! Be aware of potential securtiy issues when embedding an external website - you should only do this if you trust the site! Here, I added different types of backgrounds on each slide, including image, video, html, and color:
+</p></li>
+</ol>
+<pre class="html"><code>---
+output: 
+  revealjs::revealjs_presentation:
+    transition: default
+    self_contained: false
+    reveal_plugins: notes
+    css: styles.css
+    center: true
+    mathjax: NULL
+---
+
+# {data-background=&quot;https://images.pexels.com/photos/949587/pexels-photo-949587.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500&quot;}
+
+&lt;h1 style=&quot;color: #fff&quot;&gt;Caitlin&#39;s Presentation&lt;/h1&gt;
+
+# {data-background=#262626}
+
+&lt;h1 style=&quot;color: #fff&quot;&gt;Check out my website&lt;/h1&gt;
+
+## {data-background-iframe=&quot;https://www.caitlincasar.com&quot;}
+
+# Check out this video I made 
+
+## 
+&lt;iframe width=&quot;100%&quot; height=&quot;500&quot; src=&quot;https://www.youtube.com/embed/FZ66_XqZZhg&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+## {data-background-video=&quot;AreWeAlone_Corrected.mp4&quot;}</code></pre>
+<iframe src="example_slides/example2.html" width="100%" height="500" style="border: none;">
+</iframe>
+<p>
+<strong>Note:</strong> This example doesn’t include the last slide in the example Rmarkdown above due to file size limits on Github where I host my content.
+</p>
+<ol start="7" style="list-style-type: decimal">
+<li><p>
+Let’s add some fun styling with CSS! Open a new text file and name it styles.css. Save this in the same directory as your Rmarkdown file.
+<p></li>
+</ol>
+<p><img class="post" src="images/text-file.png"></p>
+<p>
+Add some styling to the h1 element - these are the headers in your slide. Here, I’m changing the font color and adding a cool animation.
+</p>
+<pre class="css"><code>.present .tracking-in-expand {
+    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+            animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+h1 {
+    color: #262626;
+    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite both;
+            animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite both;
+}</code></pre>
+<p><img class="post" src="images/styles.png"></p>
+<p>
+This is the Rmarkdown content I used to produce the slide below:
+</p>
+<pre class="r"><code>---
+output: 
+  revealjs::revealjs_presentation:
+    transition: default
+    self_contained: false
+    reveal_plugins: notes
+    css: styles.css
+    center: true
+    mathjax: NULL
+---
+
+# {data-background=#262626}
+
+&lt;h1 style=&quot;color: #fff&quot;&gt;Caitlin&#39;s Presentation&lt;/h1&gt;</code></pre>
+<iframe src="example_slides/example3/example3.html" width="100%" height="500" style="border: none;">
+</iframe>
+<p>
+Here’s an example where I used both custom CSS and a custom html header:
+</p>
+<pre class="css"><code>@-webkit-keyframes color-change-5x {
+  0% {
+    color: #19dcea;
+  }
+  25% {
+    color: #b22cff;
+  }
+  50% {
+    color: #ea2222;
+  }
+  75% {
+    color: #f5be10;
+  }
+  100% {
+    color: #3bd80d;
+  }
+}
+@keyframes color-change-5x {
+  0% {
+    color: #19dcea;
+  }
+  25% {
+    color: #b22cff;
+  }
+  50% {
+    color: #ea2222;
+  }
+  75% {
+    color: #f5be10;
+  }
+  100% {
+    color: #3bd80d;
+  }
+}
+
+
+#title h1 {
+    font-size: 1.50em;
+    color: #ffff00;
+    font-family: &#39;Roboto&#39;, sans-serif !important;
+        -webkit-animation: color-change-5x 8s linear infinite alternate both;
+            animation: color-change-5x 8s linear infinite alternate both;
+}       
+
+.color-change-5x-background {
+    -webkit-animation: color-change-5x-background 2s linear infinite alternate both;
+            animation: color-change-5x-background 2s linear infinite alternate both;
+}
+
+
+@-webkit-keyframes color-change-5x-background {
+  0% {
+    background: #19dcea;
+  }
+  25% {
+    background: #b22cff;
+  }
+  50% {
+    background: #ea2222;
+  }
+  75% {
+    background: #f5be10;
+  }
+  100% {
+    background: #3bd80d;
+  }
+}
+@keyframes color-change-5x-background {
+  0% {
+    background: #19dcea;
+  }
+  25% {
+    background: #b22cff;
+  }
+  50% {
+    background: #ea2222;
+  }
+  75% {
+    background: #f5be10;
+  }
+  100% {
+    background: #3bd80d;
+  }
+}</code></pre>
+<p><img class="post" src="images/styles.png"></p>
+<p>
+I added custom font from Google fonts by creating a new text file called header.html and adding this to the file:
+</p>
+<pre class="html"><code>&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Roboto:wght@900&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;</code></pre>
+<p>
+This is the Rmarkdown file I used to produce the slides below:
+</p>
+<pre class="r"><code>---
+output: 
+  revealjs::revealjs_presentation:
+    transition: default
+    self_contained: false
+    reveal_plugins: notes
+    css: styles.css
+    in_header: header.html
+    center: true
+    mathjax: NULL
+---
+
+# {#title data-background=#262626}
+
+&lt;h1 style=&quot;color: #fff&quot;&gt;Caitlin&#39;s Presentation&lt;/h1&gt;
+
+# Rainbow background! {.color-change-5x-background}</code></pre>
+<iframe src="example_slides/example4/example4.html" width="100%" height="500" style="border: none;">
+</iframe>
+<p>
+As you can see, there’s a ton of cool stuff you can do with revealjs! Check out the <a href="https://github.com/rstudio/revealjs" target="_blank">official documentation</a> for more information, and check out <a href="https://github.com/rstudio/revealjs" target="_blank">this guide</a> for more info on Rmarkdown.
+</p>
+<p>
+Congrats on making awesome slides in revealjs! 😎 Feel free to comment below with any comments/questions!
+</p>
