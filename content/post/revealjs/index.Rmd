@@ -3,7 +3,13 @@ title: "Making beautiful interactive slides with revealJS"
 author: "Caitlin"
 date: 2020-06-28T21:14:16-05:00
 output: html_document
-thumbnail: ""
+thumbnail: "featured.png"
+twitterImg: featured.png
+featured: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
 categories: ["R", "css", "html", "javascript"]
 tags: ["revealjs"]
 description: "Learn to create beautiful slides in revealJS."
@@ -13,7 +19,7 @@ description: "Learn to create beautiful slides in revealJS."
 
 <iframe src="SpringCommitteeMeeting2020/revealjs.html" width="100%" height="500" style="border: none;"></iframe> 
 
-<p>This presentation was a lot of fun to make! Here I'll show you the basics, then I'll give examples of more advanced stuff you can do.</p> 
+<p>This presentation was a lot of fun to make! Here I'll show you the basics, then I'll give examples of more advanced stuff you can do.</p>
 
 1. <p>First, we need to get set up to use revealjs in R. Open RStudio and run the following in your console:</p>
 
@@ -92,7 +98,7 @@ output:
 
 6. <p>Let's add some style to the slides. We can add a background color, background image, or embed an html file as the background! Be aware of potential securtiy issues when embedding an external website - you should only do this if you trust the site! Here, I added different types of backgrounds on each slide, including image, video, html, and color:</p>
 
-```{html, eval = F}
+```{r, eval = F}
 ---
 output: 
   revealjs::revealjs_presentation:
@@ -288,7 +294,7 @@ output:
 
 <p>I added custom font from Google fonts by creating a new text file called header.html and adding this to the file:</p>
 
-```{html, eval=F}
+```{r, eval=F}
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
 ```
 
