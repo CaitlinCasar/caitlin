@@ -1,18 +1,18 @@
 ---
 title: "Making beautiful interactive slides with revealJS"
 author: "Caitlin"
-date: 2020-06-28T21:14:16-05:00
+date: 2020-06-28
 output: html_document
 thumbnail: "featured.png"
+categories: ["R"]
+tags: ["revealjs", "CSS", "HTML", "javascript"]
 twitterImg: featured.png
+description: "Learn to create beautiful slides in revealJS."
 featured: yes
 image:
   caption: ''
   focal_point: ''
   preview_only: no
-categories: ["R", "css", "html", "javascript"]
-tags: ["revealjs"]
-description: "Learn to create beautiful slides in revealJS."
 ---
 
 <p>Today I'll show you how to spice up your presentations with [revealJS](https://github.com/rstudio/revealjs){target="_blank"} in R. This is an HTML presentation framework that allows you to share your slides on the web, add custom animations, embed websites into your slides, and more! Here's an example of a presentation I made for my 2020 Spring Committee Meeting:</p>
@@ -298,7 +298,7 @@ output:
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
 ```
 
-<p>This is the Rmarkdown file I used to produce the slides below:</p>
+<p>This is the Rmarkdown file I used to produce the slides below:</p> 
 
 ```{r, eval=F}
 ---
