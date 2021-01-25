@@ -1,0 +1,132 @@
+---
+title: "Deck out your Jupyter Notebook"
+author: "Caitlin"
+date: 2020-07-04T21:12:16-05:00
+output: html_document
+thumbnail: "featured.png"
+categories: ["Python"]
+tags: ["Jupyter"]
+twitterImg: featured.png
+description: "Check out 10 ways to deck out your Jupyter Notebook"
+featured: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+---
+
+
+
+<p>Today I’m sharing my top 10 list of cool things you can do in <a href="https://jupyter.org/" target="_blank">Jupyter</a> notebooks!</p>
+<div id="jupyter-notebook-extensions" class="section level2">
+<h2>1. Jupyter notebook extensions</h2>
+<p>
+You can add functionality to your Jupyter notebook with <a href="https://github.com/ipython-contrib/jupyter_contrib_nbextensions" target="_blank">Jupyter Notebook Extensions</a>! To install Jupyter Notebook Extensions, run the following in your terminal:
+</p>
+<pre class="bash"><code>pip install jupyter_contrib_nbextensions
+jupyter contrib nbextension install --user
+jupyter nbextensions_configurator enable --user</code></pre>
+<p>
+To view your extensions, launch a Jupyter notebook in your browser and click on the Nbextensions tab in your tree view. You can also type the url into your browser, as in ‘<a href="http://localhost:8899/tree#nbextensions_configurator" class="uri">http://localhost:8899/tree#nbextensions_configurator</a>’.
+</p>
+<p><img class="post" src="images/nbextensions.png"></p>
+<p>
+<strong>Note:</strong> Your extensions may appear grayed out and indicate a compatability issue with newest version of Jupyter Notebook as referenced on StackOverflow <a href="https://stackoverflow.com/questions/58146683/all-jupyter-contrib-nbextensions-are-marked-as-possibly-incompatible" target="_blank">here</a>. To use extensions, uncheck the box next to ‘disable configuration for nbextensions without explicit compatibility (they may break your notebook environment, but can be useful to show for nbextension development)’.
+</p>
+<p>
+Try turning on the <a href="https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/nbextensions/toc2/README.html#" target="_blank">Table of Contents (2)</a> extension. This is a nice tool for organizing your notebook in a way that can be easily navigated via the TOC sidebar. Here I created a series of markdown cells and code cells with different header hierarchy which you can see is reflected in the TOC.
+</p>
+<p><img class="post" src="images/toc-demo.png"></p>
+<p>
+Another cool extension is <a href="https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/nbextensions/collapsible_headings/readme.html" target="_blank">Collapsible Headings</a>. In my example, you can see there are now gray arrows next to each cell, and I’ve collapsed the cells with headers ‘Here’s another string’, and ‘Print your Strings’ so that the contents below each are now hidden.
+</p>
+<p><img class="post" src="images/collapsible-headings.png"></p>
+</div>
+<div id="plotly-for-interactive-plots" class="section level2">
+<h2>2. Plotly for interactive plots</h2>
+<p>
+A great tool for plotting is Plotly, which creates interactive figures that can streamline your data exploration.
+</p>
+</div>
+<div id="magics" class="section level2">
+<h2>3. Magics</h2>
+<p><a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html" target="_blank">Magics</a></p>
+</div>
+<div id="widgets" class="section level2">
+<h2>4. Widgets</h2>
+<p>
+<a href="https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20Basics.html" target="_blank">Widgets</a> are eventful Python objects like sliders and drowdown menus that allow you to create a GUI in your notebook. Run this in your teminal to install the widgets extension:
+</p>
+<pre class="bash"><code>pip install ipywidgets
+jupyter nbextension enable --py widgetsnbextension</code></pre>
+<p>
+You can see the full list of available widgets <a href="https://ipywidgets.readthedocs.io/en/latest/examples/Widget%20List.html" target="_blank">here</a>, which includes buttons, sliders, dropdowns, and more! One that I think is particulary cool is the widget for HTML. I use iframes pretty frequently - check out how I embedded an iframe in my notebook which allows me to navigate my website inside the iframe:
+</p>
+<p><img class="post" src="images/widget.png"></p>
+</div>
+<div id="nbconvert" class="section level2">
+<h2>5. nbconvert</h2>
+<p>
+Your workflow might include Jupyter notebooks for documentation, and a python script for batch jobs. You can easily convert your Jupyter notebook to a Python script or other formats with <a href="https://nbconvert.readthedocs.io/en/latest/" target="_blank">nbconvert</a>. To do this from your Jupyter notebook, run the following in a code cell:
+</p>
+<pre class="bash"><code>!jupyter nbconvert --to python &#39;example.ipynb&#39; --stdout</code></pre>
+<p>
+When I run this in my notebook in the nbextensions example above, I get the following output:
+</p>
+<pre class="markdown"><code>[NbConvertApp] Converting notebook pycharm.ipynb to python
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Creating a string
+# 
+# 
+
+# In[7]:
+
+
+my_string = &quot;Caitlin&quot;
+
+
+# ## Here&#39;s another string
+
+# In[6]:
+
+
+another_string = &quot;Hello!&quot;
+
+
+# ## And another string
+
+# In[9]:
+
+
+and_another_string = &quot;Howdy!&quot;
+
+
+# ### Print your Strings 
+
+# In[11]:
+
+
+print(my_string, another_string, and_another_string)</code></pre>
+<p>
+You can also convert your notebook to a script without the markdown cells. For more info, see the documentation <a href="https://nbconvert.readthedocs.io/en/latest/customizing.html#Converting-a-notebook-to-an-(I)Python-script-and-printing-to-stdout" target="_blank">here</a>.
+</p>
+</div>
+<div id="color-themes" class="section level2">
+<h2>6. Color Themes</h2>
+<p><a href="https://github.com/dunovank/jupyter-themes" target="_blank">jupyter-themes</a></p>
+<p><a href="https://darkreader.org/" target="_blank">Dark Reader</a></p>
+</div>
+<div id="plotly-for-interactive-plots-1" class="section level2">
+<h2>7. Plotly for interactive plots</h2>
+</div>
+<div id="plotly-for-interactive-plots-2" class="section level2">
+<h2>8. Plotly for interactive plots</h2>
+</div>
+<div id="plotly-for-interactive-plots-3" class="section level2">
+<h2>9. Plotly for interactive plots</h2>
+</div>
+<div id="plotly-for-interactive-plots-4" class="section level2">
+<h2>10. Plotly for interactive plots</h2>
+</div>
