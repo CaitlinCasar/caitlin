@@ -1,0 +1,274 @@
+---
+title: "The Microbial Ecologist's Toolbox"
+author: "Caitlin"
+date: 2021-02-02T21:12:16-05:00
+output: html_document
+thumbnail: "featured.png"
+categories: ["R", "QIIME", "16S rRNA"]
+tags: ["R"]
+twitterImg: featured.png
+description: "Check out the tools I use for microbial ecology!"
+featured: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+---
+
+
+
+<p class="caption">
+Caitlin and Matt descending into madness after extracting DNA from 200 samples, 2019.
+</p>
+<p>
+Today I’m sharing my the tools I use for microbial ecology! As a microbial ecologist, I often go out into the environment and collect samples like rocks or fluids so I can study the kinds of microbes that live in them. To get at the microbial communities, I extract DNA from these samples, typically with a <a href="https://www.qiagen.com/us/products/discovery-and-translational-research/dna-rna-purification/dna-purification/microbial-dna/dneasy-powerwater-sterivex-kit/#orderinginformation" target="_blank">DNA extraction kit</a>. I like kits because they’re quick, convenient, and don’t require working with large volumes of phenol and chloroform - very nasty stuff! Once I have the DNA extract, the next step is shipping it off to a sequencing facility like the <a href="https://www.anl.gov/bio/environmental-sample-preparation-and-sequencing-facility" target="_blank">Environmental Sample Preparation and Sequencing Facility</a> at Argonne National Lab. The type of sequencing service we choose depends on our budget and what kind of data we want. For example, do we want to sequence a single marker gene, like the 16S rRNA gene? Or do we want to sequence ALL of the genes in our sample? The latter is much more expensive, although advances in sequencing technology are making this type of data more affordable. When the sequencing is done (a process that can take months depending on the number of other submissions in queue), the facility sends us our raw data. Great! Now what do we do with it? I’ll talk about some of the tools I use for both 16S rRNA gene amplicon and whole metagenome sequence data.
+</p>
+<div id="jump-to-section" class="section level3">
+<h3>Jump to Section:</h3>
+<ul>
+<li>
+<a href="#amplicon">16S rRNA sequence data</a>
+</li>
+<ul>
+<li>
+<a href="#qiime">QIIME</a>
+</li>
+<ul>
+<li>
+<a href="#qiime-pipeline">Example QIIME pipeline</a>
+</li>
+</ul>
+<li>
+<a href="#qiime2R">qiime2R</a>
+</li>
+<li>
+<a href="#vegan">vegan</a>
+</li>
+</ul>
+<li>
+<a href="#metagenome">Whole metagenome sequence data</a>
+</li>
+<ul>
+<li>
+<a href="#fegenie">FeGenie</a>
+</li>
+<li>
+<a href="#metabolic">METABOLIC</a>
+</li>
+<li>
+<a href="#gtotree">GtoTree</a>
+</li>
+</ul>
+</ul>
+</div>
+<div id="amplicon" class="section level2">
+<h2>16s rRNA gene amplicon sequence data</h2>
+<img class="post" src="images/dna.png">
+<p class="caption">
+Left: SEM image of biofilm on rock surface. Right: My doodle of a circular prokaryotic chromosome made of double-stranded DNA. The letters ‘A’, ‘T’, ‘G’, and ‘C’ represent the nucleotides adenine, thymine, guanine, and cytosine that make up DNA.
+</p>
+<p>
+What the heck is a 16s rRNA gene, you might ask? Great question! The <strong>short answer</strong> is: it’s a universal taxonomic marker gene for prokaryotes (bacteria or archaea). With it, we can determine <em>who</em> our microbial community is comprised of. But because it is a single gene, and not the entire suite of genes present in the community, that is all we can determine with this data. If we want to know <em>what</em> they are doing, i.e. their functional potential, then we need more data.
+</p>
+<p>
+The <strong>longer answer</strong> is: the 16S rRNA gene encodes the RNA component of the small subunit of the prokaryotic ribosome and is present in most prokaryotes. The ‘S’ stands for Svedberg, the unit of measurement of the sedimentation rate in a centrifuge. The ribosome is a critical component of the prokaryotic cell - too many mutations to its components spells dysfunction and death - so the function of the 16S rRNA gene has not changed over time. The gene conains highly conserved and hypervariable regions over a length of ~1500 base pairs (bp) that allow for comparison across taxonomic groups. To compare the genes between two different organisms, we align the sequences and compare the differences in nucleotides. The use of the 16S rRNA gene as a taxonomic marker gene was pioneered by Carl Woese and George E. Fox in the 1970’s.
+</p>
+<p>
+Ok but <strong>how do we assign taxonomy?</strong> To do this, we compare our unknown 16S rRNA gene sequences from the environment to a reference database of classified 16S rRNA genes, and there are lots of different databases to choose from! Your choice of database depends on a few things, like what kind of microbiome you’re studying and what computing resources are available to you. My database of choice is <a href="https://www.arb-silva.de/" target="_blank">SILVA</a>. This database is highly curated and covers all three domains of life, making it a great choice for environmental ecologiists.
+</p>
+<p>
+<strong>What will your data look like?</strong> This depends on your sequencing service. For 16S rRNA gene amplicon sequencing, we use the <a href="https://www.illumina.com/systems/sequencing-platforms/miseq.html">Illumina MiSeq Instrument</a>. This generates paired-end sequences of ~150 bp in length. The paired-ends are sequences from the 3’ and 5’ ends of the gene - i.e. the forward and reverse complement of the DNA. The paired-end reads share an overlapping region that can be used to join them into a final length of ~253 bp. Note that this is only a short segment of the total 1500 bp that make up the full 16S rRNA gene. This is a function of the sequencing platform and the primer set we use. A primer set determines the region of the 16S rRNA gene to be amplified via the polymerase chain reaction (PCR) prior to sequencing. We typically use a “universal” primer set, i.e. 516F/806R flanking the V4 hypervariable region. I put quotes around the word “universal” because it’s pretty well-established at this point that these primers are not universal and they tend to bias against archaea. These types of caveats are HUGELY important to consider when you’re interpreting your data. But for now, let’s stick to the basics. To give you an idea of what a single 16S rRNA gene sequence read looks like after the paired-ends are joined, check this out:
+</p>
+<pre class="bash"><code>&gt;0025ee6d8ffc3527fae928577cd83974
+AGCGTTGTTCGGAATTACTGGGCGTAAAGGGCGTGTAGGCGGCACTATAAGTCAGATGTGAAAGCCCATGGCTTAACTGTGGAAGAGCATTTGAAACTGTAGAGCTTGAGTATGGGAGAGGGGAGTGGAATTCCCGGTGTAGAGGTGAAATTCGTAGATATCGGGAGGAACACCGGTGGCGAAAGCGACTTCCTGGACCAATACTGACGCTAAGGCGCGAAAGCGTG</code></pre>
+<p>
+In the above sequence, you should notice a ‘&gt;’ symbol. This is used to denote a def line containing information about the following nucleotide sequence. In this example, the def line contains the amplicon sequence variant ID. Immediately following this line is the 16S rRNA gene sequence which is comprised of the letters ‘A’, ‘T’, ‘G’, and ‘C’, which represent the nucleotides adenine, thymine, guanine, and cytosine. This format is called ‘fasta’ which is standard for nucleotide or amino acid sequence text files. After you join your raw paired-end reads and quality filter them, you’ll end up with a gigantic fasta file with thousands to millions of lines like this. This is where it gets fun! Let’s talk about what tools to use to handle this kind of data.
+</p>
+<div id="qiime" class="section level3">
+<h3>QIIME</h3>
+<p>
+<em>Big shoutout to <a href="https://mselensky.github.io/" target="_blank">Matt Selensky</a> for helping me navigate my reluctant transition from QIIME1 to QIIME2 - the code chunks in this section are adapted from his pipeline!</em>
+</p>
+<p>
+One of the tools I use most often is <a href="https://qiime2.org/" target="_blank">QIIME</a> - Quantitative Insights Into Microbial Ecology. QIIME is an open-source bioinformatics pipeline that I use for processing my raw 16s rRNA gene amplicon sequence data. It’s easy to install and has lots of great features that allow you to customize a pipeline that works best for your data. If you’re curious about using QIIME1 vs QIIME2, the big difference is that QIIME2 incorporates the DADA2 algorithm for classifying sequences into amplicon sequence variants (ASVs). This is a relatively new approach but is quickly becoming the standard - for more info on ASVs check out this <a href="https://www.nature.com/articles/nmeth.3869" target="_blank">article</a> or this <a href="https://benjjneb.github.io/dada2/index.html" target="_blank">site</a>.
+</p>
+<p>
+QIIME offers a number of convenient installation methods including <a href="https://docs.qiime2.org/2020.11/install/native/#install-qiime-2-within-a-conda-environment">conda</a> and <a href="https://docs.qiime2.org/2020.11/install/virtual/docker/">Docker</a>. I personally use Docker because it was easiest to install on the remote server I use. Here’s an example of how to install QIIME2 with Docker:
+</p>
+<pre class="bash"><code># Navigate to your working directory and run:
+    module load singularity
+    singularity pull docker://qiime2/core:2020.8
+    # This should install qiime2_2020.8.sif which you will call before each command</code></pre>
+<p>
+To assign taxonomies, you’ll need to download your reference database. Here’s an example of how to install SILVA138:
+</p>
+<pre class="bash"><code># - If you are using the 515F/806R primers, obtain its corresponding pre-trained Silva138 taxonomy classifier from the Q2 developers:
+    # Navigate to your working directory and run:
+    wget https://data.qiime2.org/2020.6/common/silva-138-99-515-806-nb-classifier.qza</code></pre>
+<p>
+Before you run QIIME2, make sure your files are properly organized and formatted:
+</p>
+<pre eval="F"><code># - Rename the following metadata (mapping file) columns:
+    # column &quot;#SampleID&quot; to &quot;sample-id&quot;
+    # column &quot;BarcodeSequence&quot; to &quot;barcode-sequence&quot;
+    # column &quot;LinkerPrimerSequence&quot; to &quot;linker-primer-sequence&quot;
+
+# - For each paired-end, multiplexed run:
+    # Save forward, reverse, and barcode sequences into a single directory
+    # The files must be *exactly* named:
+        # reverse.fastq.gz
+        # forward.fastq.gz
+        # barcodes.fastq.gz
+
+# You should now be ready to process your data.</code></pre>
+<p>
+Now that you have QIIME2 installed, you’re ready to run the pipeline! I use QIIME to assemble and quality filter my raw reads, assign taxonomy and output an ASV table, and compute basic diversity metrics. The ASV table will give you the number of reads assigned to each ASV for each of your sample communities. QIIME has lots of other tools you might be interested in for statistical analyses, but personally I like to do that sort of stuff in R because it’s more convenient in my opinion. <strong>Here’s an example of my QIIME pipeline:</strong>
+</p>
+<div id="qiime-pipeline" class="section level4">
+<h4>QIIME pipeline</h4>
+<pre class="bash"><code>#load singularity
+module load singularity
+
+#loop over directories 
+for path in /directory_with_raw_data*; do
+    [ -d &quot;${path}&quot; ] || continue # if not a directory, skip
+    dirname=&quot;$(basename &quot;${path}&quot;)&quot;
+
+
+echo importing $dirname ...
+##### import split, multiplexed paired-end reads from each sequencing run into .qza format #####
+# input-path must be a folder containing the following files *exactly* named:
+    # reverse.fastq.gz
+    # forward.fastq.gz
+    # barcodes.fastq.gz
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime tools import \
+  --type EMPPairedEndSequences \
+  --input-path ${path}/data \
+  --output-path /my_working_directory/$dirname/$dirname&#39;-emp-paired-end-sequences.qza&#39;
+
+echo demultiplexing $dirname ...
+##### demultiplex sequence data ######
+# provided metadata files (AKA mapping files) from Box folders must have the following features:
+    # column &quot;#SampleID&quot; renamed to &quot;sample-id&quot;
+    # column &quot;BarcodeSequence&quot; renamed to &quot;barcode-sequence&quot;
+    # column &quot;LinkerPrimerSequence&quot; renamed to &quot;linker-primer-sequence&quot;
+    # file must be saved with .tsv extension
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime demux emp-paired \
+  --m-barcodes-file ${path}/$dirname&#39;_map.txt&#39; \
+  --m-barcodes-column barcode-sequence \
+  --i-seqs /my_working_directory/$dirname/$dirname&#39;-emp-paired-end-sequences.qza&#39; \
+  --o-per-sample-sequences /my_working_directory/$dirname/$dirname&#39;-demux.qza&#39; \
+  --o-error-correction-details /my_working_directory/$dirname/$dirname&#39;-demux-details.qza&#39; \
+  --p-no-golay-error-correction # might need to include, per https://forum.qiime2.org/t/demux-with-very-little-reads/10161/11
+
+echo picking ASVs for $dirname ...
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime dada2 denoise-paired \
+  --i-demultiplexed-seqs /my_working_directory/$dirname/$dirname&#39;-demux.qza&#39; \
+  --p-trim-left-f 13 \
+  --p-trim-left-r 13 \
+  --p-trunc-len-f 150 \
+  --p-trunc-len-r 150 \
+  --o-table /my_working_directory/$dirname/$dirname&#39;-asv-table.qza&#39; \
+  --o-representative-sequences /my_working_directory/$dirname/$dirname&#39;-rep-seqs.qza&#39; \
+  --o-denoising-stats /my_working_directory/$dirname/$dirname&#39;-denoising-stats.qza&#39;
+
+  done
+
+echo merging data ...
+  ##### merge denoised data (only if you have data from multiple sequencing runs) #####
+# merge table:
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime feature-table merge \
+  --i-tables /my_working_directory/datasetA/datasetA-asv-table.qza \
+  --i-tables /my_working_directory/datasetB/datasetB-asv-table.qza \
+  --i-tables /my_working_directory/datasetC/datasetC-asv-table.qza \
+  --o-merged-table /my_working_directory/merged_data-asv-table.qza
+
+echo merging rep seqs ...
+# merge representative-sequences:
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime feature-table merge-seqs \
+  --i-data /my_working_directory/datasetA/datasetA-rep-seqs.qza \
+  --i-data /my_working_directory/datasetB/datasetB-rep-seqs.qza \
+  --i-data /my_working_directory/datasetC/datasetC-rep-seqs.qza \
+  --o-merged-data /my_working_directory/merged_data-rep-seqs.qza
+
+echo assigning taxonomy ...
+ ##### assign taxonomy using pre-trained silva classifier for 515F/806R primer pair (via sklearn) #####
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime feature-classifier classify-sklearn \
+  --i-classifier ~/silva-138-99-515-806-nb-classifier.qza \
+  --i-reads /my_working_directory/merged_data-rep-seqs.qza \
+  --p-reads-per-batch 10000 \
+  --o-classification /my_working_directory/merged_data-taxonomy-Silva138.qza \
+  --p-n-jobs 4
+
+echo getting phylo tree ...
+##### phylogenetic tree #####
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences /my_working_directory/merged_data-rep-seqs.qza \
+  --o-alignment /my_working_directory/merged_data-aligned-rep-seqs.qza \
+  --o-masked-alignment /my_working_directory/merged_data-masked-aligned-rep-seqs.qza \
+  --o-tree /my_working_directory/merged_data-unrooted-tree.qza \
+  --o-rooted-tree /my_working_directory/merged_data-rooted-tree.qza
+
+echo getting rarefaction curves ...
+#I chose this max-depth because it corresponds to the median number of reads among my samples 
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime diversity alpha-rarefaction \
+--i-table /my_working_directory/merged_data-asv-table.qza \
+--i-phylogeny /my_working_directory/merged_data-rooted-tree.qza \
+--p-max-depth 63000 \
+--p-min-depth 500 \
+--p-steps 500 \
+--p-iterations 10 \
+--m-metadata-file /my_working_directory/merged_data_metadata.txt \
+--output-dir casar20201_rarefaction_data
+
+
+echo rarefying data ...
+##### rarefaction (sampling depth = 47468) #####
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime feature-table rarefy \
+--i-table /my_working_directory/merged_data-asv-table.qza \
+--p-sampling-depth 47468 \
+--o-rarefied-table /my_working_directory/Casar2021-asv-table-rarefied-47468.qza
+
+
+echo calculating diversity metrics ...
+
+#calculate core metrics
+#I chose this sampling depth because it corresponds to the minimum number of reads among each of my samples 
+singularity exec -B /my_working_directory ~/qiime2_2020.8.sif qiime diversity core-metrics-phylogenetic \
+--i-phylogeny /my_working_directory/merged_data-rooted-tree.qza \
+--i-table /my_working_directory/merged_data-asv-table.qza \
+--p-sampling-depth 47468 \ 
+--m-metadata-file /my_working_directory/merged_data_metadata.txt \
+--output-dir core_metrics \
+--p-n-jobs 16 \
+--verbose \
+&amp;&gt; core_metrics_samples.log
+
+echo done!</code></pre>
+</div>
+</div>
+<div id="qiime2R" class="section level3">
+<h3>qiime2R</h3>
+<p>
+Once you have your ASV table from QIIME, you might want to do some further analyses in R. You can easily import your QIIME2 ‘.qsv’ files into R using the <code>qiime2R</code> package.
+</p>
+</div>
+<div id="vegan" class="section level3">
+<h3>vegan</h3>
+<p>
+I like to visualize my community data with NMDS plots and dendrograms to see how similar the communities are to each other. A great package for handling ecological data is <code>vegan</code>.
+</p>
+</div>
+</div>
+<div id="metagenome" class="section level2">
+<h2>Whole metagenenome sequence data</h2>
+<div id="fegenie" class="section level3">
+<h3>FeGenie</h3>
+</div>
+<div id="metabolic" class="section level3">
+<h3>METABOLIC</h3>
+</div>
+<div id="gtotree" class="section level3">
+<h3>GtoTree</h3>
+</div>
+</div>
