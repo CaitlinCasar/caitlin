@@ -42,4 +42,4 @@ user_groups:
 - Visitors
 ---
 
-I'm a PhD candidate in the Osburn Isotope Geobiology Lab studying geomicrobiology at the Deep Mine Microbial Observatory, SD.
+I'm a data scientist interested in astrobiology.

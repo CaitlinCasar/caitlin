@@ -10,7 +10,7 @@
 
 [[main]]
   name = "Blog"
-  url = "index.html#posts"
+  url = "#posts"
   weight = 20
 
 #[[main]]
@@ -20,13 +20,13 @@
 
 [[main]]
   name = "Publications"
-  url = "index.html#publications"
+  url = "#publications"
   weight = 40
 
 
 [[main]]
   name = "Contact"
-  url = "index.html#contact"
+  url = "#contact"
   weight = 60
   
 
@@ -34,5 +34,5 @@
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
  [[main]]
     name = "CV"
-    url = "files/Casar_CV_May2020.pdf"
+    url = "files/Casar_CV_May2021.pdf"
     weight = 70
