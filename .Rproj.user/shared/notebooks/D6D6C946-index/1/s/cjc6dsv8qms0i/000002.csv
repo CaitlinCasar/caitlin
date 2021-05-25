@@ -1,2 +1,0 @@
-"0","phylum_color <- distinctColorPalette(k = length(unique(taxon_abundance_table$taxonomy)))"
-"0","names(phylum_color) <- unique(taxon_abundance_table$taxonomy)"

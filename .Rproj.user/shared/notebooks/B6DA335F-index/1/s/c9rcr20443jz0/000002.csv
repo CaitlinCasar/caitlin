@@ -1,4 +1,0 @@
-"0","#pull out ordination and vector coordinates for plotting"
-"0","NMDS_coords <- NMDS_ord[[""points""]] %>%"
-"0","  as_tibble(rownames = ""sample_id"") %>%"
-"0","  left_join(metadata)"

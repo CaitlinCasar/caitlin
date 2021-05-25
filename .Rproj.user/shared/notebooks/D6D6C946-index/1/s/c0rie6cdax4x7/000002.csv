@@ -1,4 +1,0 @@
-"0","abundance_table <- otu_table %>%"
-"0","  select(-taxonomy) %>%"
-"0","  mutate_at(vars(-`#OTU ID`), funs(./sum(.)*100)) %>% #normalize to relative abundance "
-"0","  gather(sample_id, abundance, `7.DeMMO1.Steri.050917`:`18.800.DitchFluid.041818`) "

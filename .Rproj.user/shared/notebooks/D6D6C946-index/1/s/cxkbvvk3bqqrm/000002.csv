@@ -1,3 +1,0 @@
-"0","metathis::meta() %>% "
-"0","  metathis::meta_description(""Making figures in microbial ecology: Interative bar plots"") %>% "
-"0","  metathis::write_meta(""meta.html"")"

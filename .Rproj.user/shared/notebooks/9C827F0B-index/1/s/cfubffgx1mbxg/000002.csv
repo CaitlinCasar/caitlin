@@ -1,9 +1,0 @@
-"0","deltaG <- logK %>%"
-"0","  left_join(logQ) %>% #join the logK and logQ tables "
-"0","  left_join(reactions %>% select(rxn.number, e.transfer, reactant.a)) %>% #add the reaction number, number of electrons transferred, and minerals from each reaction "
-"0","  rename(mineral = ""reactant.a"") %>% #rename reactant.a to mineral for clarity "
-"0","  mutate(deltaG = (-2.303*8.314*283.45*(LogK-logQ))/(e.transfer*1000)) #calculate deltaG for each reaction at each site "
-"2","Joining, by = c(""rxn.number"", ""Site"")
-"
-"2","Joining, by = ""rxn.number""
-"

@@ -1,8 +1,0 @@
-"0","#set temperature units to Kelvin"
-"0","T.units(""K"")"
-"2","changed temperature units to K
-"
-"0","#set energy units to joules"
-"0","E.units(""J"")"
-"2","changed energy units to J
-"
