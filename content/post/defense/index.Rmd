@@ -1,0 +1,22 @@
+---
+title: "Watch my PhD Defense: Biofilms in the Continental Subsurface"
+author: "Caitlin"
+date: 2021-06-02T21:12:16-05:00
+output: html_document
+thumbnail: "featured.jpg"
+categories: ["Adobe"]
+tags: ["Premiere Pro", "Adobe"]
+twitterImg: featured.jpg
+description: "I defended my PhD research on April 22, 2021. You can watch my defense here!"
+featured: yes
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+  placement: 3
+---
+
+
+<p>I recently finished up my PhD and defended on April 22, 2021, aka Earth Day. Check out the video below to watch my defense and get a taste of what I worked on for the past five years! `r emo::ji("woman_student")`</p>
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/FoQGbnr5jFk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
