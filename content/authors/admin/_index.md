@@ -42,4 +42,4 @@ user_groups:
 - Visitors
 ---
 
-I'm a data scientist interested in astrobiology.
+I'm a data engineer who loves astrobiology.

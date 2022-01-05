@@ -4,12 +4,12 @@ output: html_document
 hidedate: true
 ---
 
-<img alt='Caitlin' width=300 style=' border-radius: 50%;' src='/about/avatar.jpg' class='avatar-circle' />
+<img alt='Caitlin' width=300 style=' border-radius: 50%;' src='/about/avatar.jpeg' class='avatar-circle' />
 
 
 
 
-I'm Caitlin Casar, a data scientist `r emo::ji("floppy_disk")` interested in astrobiology `r emo::ji("alien")`. I love coding, graphic design, and hanging out with my two cats, Creme Fraiche and Neko `r emo::ji("cat")``r emo::ji("cat")`.
+I'm Caitlin Casar, a data engineer `r emo::ji("floppy_disk")` and astrobiology connoisseur `r emo::ji("alien")`. I love coding, graphic design, and hanging out with my two cats, Creme Fraiche and Neko `r emo::ji("cat")``r emo::ji("cat")`.
 
 
 
@@ -26,6 +26,11 @@ I'm Caitlin Casar, a data scientist `r emo::ji("floppy_disk")` interested in ast
 <div class="horizontal_line"></div>
 
 <ul class="gray-bullets">
+<li><span>
+<a href="https://www.youtube.com/watch?v=FyZVmyG-B8I" target="_blank">2021 Horace A. Scott Graduate Award for Outstanding Research</a>
+</span></li>
+
+
 <li><span>
 <a href="https://www.earth.northwestern.edu/about/news/2017-2018/phd-candidate-caitlin-casar-wins-nasa-earth-space-science-fellowship.html" target="_blank">2018 NASA Earth and Space Science Fellowship</a>
 </span></li>
@@ -104,11 +109,19 @@ I'm Caitlin Casar, a data scientist `r emo::ji("floppy_disk")` interested in ast
 
 <ul class="gray-bullets">
 <li><span>
+<a href="https://journals.asm.org/doi/full/10.1128/AEM.00832-21" target="_blank">2021 Casar, C. P., Momper, L. M., Osburn, M. R.</a>
+</span></li>
+
+<li><span>
 <a href="https://www.frontiersin.org/articles/10.3389/fmicb.2021.658988/full" target="_blank">2021 Casar, C. P., Kruger, B. K., Osburn, M. R.</a>
 </span></li>
 
 <li><span>
 <a href="https://www.biorxiv.org/content/10.1101/2021.05.06.442964v1" target="_blank">2021 Momper, L. M., Casar, C. P., Osburn, M. R.</a>
+</span></li>
+
+<li><span>
+<a href="https://www.proquest.com/openview/a08a3b5d2880223fd32ca0b7da0f82d0/1?pq-origsite=gscholar&cbl=18750&diss=y" target="_blank">2021 Casar, C. P.</a>
 </span></li>
 
 <li><span>
@@ -124,6 +137,11 @@ I'm Caitlin Casar, a data scientist `r emo::ji("floppy_disk")` interested in ast
 <li><span>
 <a href="https://digitaledition.chicagotribune.com/tribune/article_popover.aspx?guid=287013fd-b644-40f1-9d3b-790798d67174" target="_blank">2018 Meyer-Dombard, D. R., Casar, C. P., Simon, A. G., Cardace, D., Schrenk, M. O., Arcilla, C. A.</a>
 </span></li>
+
+<li><span>
+<a href="https://indigo.uic.edu/articles/thesis/Geobiology_of_the_Zambales_Ophiolite_Philippines_and_Coast_Range_Ophiolite_California/10880495" target="_blank">2015 Casar, C. P.</a>
+</span></li>
+
 </ul>
 
 
@@ -131,6 +149,9 @@ I'm Caitlin Casar, a data scientist `r emo::ji("floppy_disk")` interested in ast
 <div class="horizontal_line"></div>
 
 <ul class="gray-bullets">
+<li><span>
+<a href="https://www.insidescience.org/news/life-lava-caves-ignores-food-surface-eats-rock-instead" target="_blank">2021 Inside Science</a>
+</span></li>
 <li><span>
 <a href="https://www.cell.com/current-biology/fulltext/S0960-9822%2821%2900594-7" target="_blank">2021 Life Underground by Michael Gross</a>
 </span></li>
